@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabacabeça</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom scrollbar for Webkit browsers */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fef3c7; /* amber-100 */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #f59e0b, #b45309); /* amber-500 to amber-700 */
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #fbbf24, #d97706); /* amber-400 to amber-600 */
+      }
+      /* Custom scrollbar for Firefox */
+      html {
+        scrollbar-width: thin;
+        scrollbar-color: #b45309 #fef3c7; /* thumb and track */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.8.2"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
