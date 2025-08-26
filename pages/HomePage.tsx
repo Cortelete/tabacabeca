@@ -79,6 +79,7 @@ const HomePage: React.FC = () => {
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
     const [isTicketsModalOpen, setIsTicketsModalOpen] = useState(false);
+    const [isProgramacaoModalOpen, setIsProgramacaoModalOpen] = useState(false);
 
     const handleRating = (rate: number) => {
       if (rate === 5) {
@@ -100,6 +101,8 @@ const HomePage: React.FC = () => {
                     <ActionButton href="https://www.instagram.com/tabacabeca" external>Instagram</ActionButton>
                     
                     <ActionButton onClick={() => setIsTicketsModalOpen(true)}>Ingressos</ActionButton>
+                    
+                    <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação da Semana</ActionButton>
 
                     <ActionButton href={GOOGLE_MAPS_URL} external>Como Chegar (Google Maps)</ActionButton>
                     <ActionButton onClick={() => setIsAboutModalOpen(true)}>Sobre Mim</ActionButton>
@@ -129,8 +132,8 @@ const HomePage: React.FC = () => {
                     <p className="text-amber-300 text-sm">
                         Levi Ras, banda de Reggae paulistana com 12 anos de estrada, apresenta um show inesquecível com clássicos do Rei do Reggae e canções autorais. Tendo dividido o palco com gigantes como Jorge Ben Jor e Marcelo D2, a banda agora chega para uma noite de pura vibe positiva com a turnê:
                     </p>
-                    <div className="py-2">
-                        <h3 className="text-xl font-bold animated-gradient-text">MarleyLove / Vamos Viajar</h3>
+                    <div className="py-4">
+                        <h3 className="text-3xl font-black animated-gradient-text tracking-wider">MarleyLove / Vamos Viajar</h3>
                     </div>
                     <a 
                         href="https://uticket.com.br/event/01LA2F9IOIMI1E?fbclid=PARlRTSAMYbf5leHRuA2FlbQIxMQABpzOQdKhAWyjcloTwTq0BzOMF7BSUsHP2eozkLLGFj0o81PiEETQ9EtkIrlrz_aem_yHIxF0iGOelUeiQ86AepSQ" 
@@ -141,6 +144,13 @@ const HomePage: React.FC = () => {
                         <span className="relative z-10">Garantir meu Ingresso</span>
                         <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-300 ease-out"></div>
                     </a>
+                </div>
+            </Modal>
+
+            <Modal isOpen={isProgramacaoModalOpen} onClose={() => setIsProgramacaoModalOpen(false)} title="Programação da Semana">
+                <div className="text-center">
+                    <p className="text-lg">Em construção! 🚧</p>
+                    <p className="text-amber-300 mt-2">Em breve a programação completa da semana estará disponível aqui.</p>
                 </div>
             </Modal>
 
