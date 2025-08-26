@@ -93,7 +93,7 @@ const HomePage: React.FC = () => {
         <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center h-full">
             <div className="w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl flex flex-col items-center">
 
-                <img src="/logo.png" alt="Tabacabeça Logo" className="w-32 sm:w-44 h-auto mb-4 shadow-lg transition-transform duration-300 hover:scale-105" />
+                <img src="/logo.png" alt="Tabacabeça Logo" className="w-32 sm:w-44 h-auto mb-4 transition-transform duration-300 hover:scale-105" />
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 animated-gradient-title">Tabacabeça</h1>
                 <p className="text-amber-200 italic mb-6 sm:mb-8 text-sm sm:text-base">“A erva é a cura da nação 🌿🔥 – Bob Marley”</p>
 
