@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
 import { GOOGLE_MAPS_URL, GOOGLE_REVIEW_URL, FORM_SUBMIT_EMAIL } from '../constants';
 
-const ActionButton: React.FC<{ href?: string; to?: string; onClick?: () => void; children: React.ReactNode; external?: boolean; disabled?: boolean; }> = ({ href, to, onClick, children, external = false, disabled = false }) => {
+const ActionButton: React.FC<{ href?: string; to?: string; onClick?: () => void; children: React.ReactNode; external?: boolean; disabled?: boolean; onExternalClick?: (url: string) => void; }> = ({ href, to, onClick, children, external = false, disabled = false, onExternalClick }) => {
     const classes = `
-        relative w-full text-center font-semibold py-3 px-6 rounded-lg transition-all duration-300
+        relative w-full text-center font-semibold py-2 px-4 sm:py-2.5 sm:px-6 rounded-lg transition-all duration-300
         bg-amber-200/10 bg-clip-padding backdrop-filter backdrop-blur-md border
-        text-amber-100
+        text-amber-100 text-sm sm:text-base
         border-amber-400/30
         hover:border-amber-400/70
         overflow-hidden group
@@ -27,6 +27,9 @@ const ActionButton: React.FC<{ href?: string; to?: string; onClick?: () => void;
     }
 
     if (href) {
+        if (external && onExternalClick) {
+            return <button onClick={() => onExternalClick(href)} className={classes}>{content}</button>;
+        }
         return <a href={href} target={external ? "_blank" : "_self"} rel={external ? "noopener noreferrer" : ""} className={classes}>{content}</a>;
     }
     if (to) {
@@ -40,7 +43,7 @@ const Star: React.FC<{ filled: boolean; onClick: () => void; onMouseEnter: () =>
         onClick={onClick} 
         onMouseEnter={onMouseEnter} 
         onMouseLeave={onMouseLeave}
-        className={`w-8 h-8 cursor-pointer transition-all duration-200 transform hover:scale-110 ${filled ? 'text-amber-400' : 'text-amber-200/50'}`}
+        className={`w-7 h-7 sm:w-8 sm:h-8 cursor-pointer transition-all duration-200 transform hover:scale-110 ${filled ? 'text-amber-400' : 'text-amber-200/50'}`}
         fill="currentColor" 
         viewBox="0 0 20 20"
     >
@@ -75,7 +78,11 @@ const StarRating: React.FC<{ onRate: (rating: number) => void }> = ({ onRate }) 
     );
 }
 
-const HomePage: React.FC = () => {
+interface HomePageProps {
+  onExternalClick: (url: string) => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
     const [isTicketsModalOpen, setIsTicketsModalOpen] = useState(false);
@@ -83,32 +90,34 @@ const HomePage: React.FC = () => {
 
     const handleRating = (rate: number) => {
       if (rate === 5) {
-        window.open(GOOGLE_REVIEW_URL, '_blank');
+        onExternalClick(GOOGLE_REVIEW_URL);
       } else if (rate > 0) {
         setIsFeedbackModalOpen(true);
       }
     };
+    
+    const ticketsUrl = "https://uticket.com.br/event/01LA2F9IOIMI1E?fbclid=PARlRTSAMYbf5leHRuA2FlbQIxMQABpzOQdKhAWyjcloTwTq0BzOMF7BSUsHP2eozkLLGFj0o81PiEETQ9EtkIrlrz_aem_yHIxF0iGOelUeiQ86AepSQ";
 
     return (
-        <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center h-full">
-            <div className="w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl flex flex-col items-center">
+        <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center h-full py-2 sm:py-4">
+            <div className="w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center">
 
-                <img src="/logo.png" alt="Tabacabeça Logo" className="w-32 sm:w-44 h-auto mb-4 transition-transform duration-300 hover:scale-105" />
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 animated-gradient-title">Tabacabeça</h1>
-                <p className="text-amber-200 italic mb-6 sm:mb-8 text-sm sm:text-base">“A erva é a cura da nação 🌿🔥 – Bob Marley”</p>
+                <img src="/logo.png" alt="Tabacabeça Logo" className="w-24 sm:w-32 h-auto mb-2 transition-transform duration-300 hover:scale-105" />
+                <h1 className="text-xl sm:text-3xl font-bold mb-1 animated-gradient-title">Tabacabeça</h1>
+                <p className="text-amber-200 italic mb-3 sm:mb-4 text-xs sm:text-sm">“A erva é a cura da nação 🌿🔥 – Bob Marley”</p>
 
-                <div className="w-full flex flex-col items-center gap-4">
-                    <ActionButton href="https://www.instagram.com/tabacabeca" external>Instagram</ActionButton>
+                <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
+                    <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
                     
                     <ActionButton onClick={() => setIsTicketsModalOpen(true)}>Ingressos</ActionButton>
                     
-                    <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação da Semana</ActionButton>
+                    <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação</ActionButton>
 
-                    <ActionButton href={GOOGLE_MAPS_URL} external>Como Chegar (Google Maps)</ActionButton>
+                    <ActionButton href={GOOGLE_MAPS_URL} external onExternalClick={onExternalClick}>Como Chegar</ActionButton>
                     <ActionButton onClick={() => setIsAboutModalOpen(true)}>Sobre Mim</ActionButton>
 
-                    <div className="w-full p-4 rounded-lg bg-amber-200/10 bg-clip-padding backdrop-filter backdrop-blur-md border border-amber-400/30">
-                      <p className="font-semibold mb-2 text-amber-100">Avalie sua experiência</p>
+                    <div className="w-full p-2 rounded-lg bg-amber-200/10 bg-clip-padding backdrop-filter backdrop-blur-md border border-amber-400/30 mt-1">
+                      <p className="font-semibold mb-1 text-amber-100 text-sm">Avalie sua experiência</p>
                       <StarRating onRate={handleRating} />
                     </div>
                 </div>
@@ -135,19 +144,17 @@ const HomePage: React.FC = () => {
                     <div className="py-4">
                         <h3 className="text-xl sm:text-2xl md:text-3xl font-black animated-gradient-text tracking-wider">MarleyLove / Vamos Viajar</h3>
                     </div>
-                    <a 
-                        href="https://uticket.com.br/event/01LA2F9IOIMI1E?fbclid=PARlRTSAMYbf5leHRuA2FlbQIxMQABpzOQdKhAWyjcloTwTq0BzOMF7BSUsHP2eozkLLGFj0o81PiEETQ9EtkIrlrz_aem_yHIxF0iGOelUeiQ86AepSQ" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                    <button 
+                        onClick={() => onExternalClick(ticketsUrl)}
                         className="inline-block relative group overflow-hidden w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 hover:bg-amber-700 !mt-6"
                     >
                         <span className="relative z-10">Garantir meu Ingresso</span>
                         <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-300 ease-out"></div>
-                    </a>
+                    </button>
                 </div>
             </Modal>
 
-            <Modal isOpen={isProgramacaoModalOpen} onClose={() => setIsProgramacaoModalOpen(false)} title="Programação da Semana">
+            <Modal isOpen={isProgramacaoModalOpen} onClose={() => setIsProgramacaoModalOpen(false)} title="Programação">
                 <div className="text-center">
                     <p className="text-lg">Em construção! 🚧</p>
                     <p className="text-amber-300 mt-2">Em breve a programação completa da semana estará disponível aqui.</p>

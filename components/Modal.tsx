@@ -19,9 +19,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
         className="bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg rounded-xl shadow-lg p-6 m-4 w-full max-w-md relative border border-amber-400/20"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center mb-4">
-          {title && <h2 className="text-xl sm:text-2xl font-bold animated-gradient-text">{title}</h2>}
-          <button onClick={onClose} className="text-amber-300 hover:text-amber-100 transition-colors text-3xl leading-none">&times;</button>
+        <div className="relative flex justify-center items-center mb-4">
+          {title && <h2 className="text-xl sm:text-2xl font-bold animated-gradient-text text-center px-8">{title}</h2>}
+          <button onClick={onClose} className="absolute top-1/2 -translate-y-1/2 right-0 text-amber-300 hover:text-amber-100 transition-colors text-3xl leading-none">&times;</button>
         </div>
         <div>{children}</div>
       </div>
