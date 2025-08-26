@@ -91,11 +91,11 @@ const HomePage: React.FC = () => {
 
     return (
         <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center h-full">
-            <div className="w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-6 md:p-8 shadow-2xl flex flex-col items-center">
+            <div className="w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl flex flex-col items-center">
 
-                <img src="/logo.png" alt="Tabacabeça Logo" className="w-48 h-auto mb-4 shadow-lg" />
-                <h1 className="text-4xl font-bold mb-2 animated-gradient-title">Tabacabeça</h1>
-                <p className="text-amber-200 italic mb-8">“A erva é a cura da nação 🌿🔥 – Bob Marley”</p>
+                <img src="/logo.png" alt="Tabacabeça Logo" className="w-32 sm:w-44 h-auto mb-4 shadow-lg rounded-2xl border-2 border-amber-400/50 p-1 transition-transform duration-300 hover:scale-105" />
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 animated-gradient-title">Tabacabeça</h1>
+                <p className="text-amber-200 italic mb-6 sm:mb-8 text-sm sm:text-base">“A erva é a cura da nação 🌿🔥 – Bob Marley”</p>
 
                 <div className="w-full flex flex-col items-center gap-4">
                     <ActionButton href="https://www.instagram.com/tabacabeca" external>Instagram</ActionButton>
@@ -133,7 +133,7 @@ const HomePage: React.FC = () => {
                         Levi Ras, banda de Reggae paulistana com 12 anos de estrada, apresenta um show inesquecível com clássicos do Rei do Reggae e canções autorais. Tendo dividido o palco com gigantes como Jorge Ben Jor e Marcelo D2, a banda agora chega para uma noite de pura vibe positiva com a turnê:
                     </p>
                     <div className="py-4">
-                        <h3 className="text-3xl font-black animated-gradient-text tracking-wider">MarleyLove / Vamos Viajar</h3>
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-black animated-gradient-text tracking-wider">MarleyLove / Vamos Viajar</h3>
                     </div>
                     <a 
                         href="https://uticket.com.br/event/01LA2F9IOIMI1E?fbclid=PARlRTSAMYbf5leHRuA2FlbQIxMQABpzOQdKhAWyjcloTwTq0BzOMF7BSUsHP2eozkLLGFj0o81PiEETQ9EtkIrlrz_aem_yHIxF0iGOelUeiQ86AepSQ" 

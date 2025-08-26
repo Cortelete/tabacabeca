@@ -6,7 +6,7 @@ const Header: React.FC = () => {
     <header className="fixed top-0 left-0 right-0 z-50">
       <nav className="w-full px-4 py-3 bg-[#422B0D]/50 bg-clip-padding backdrop-filter backdrop-blur-xl border-b border-amber-600/40">
         <div className="flex justify-center items-center">
-          <Link to="/" className="text-2xl font-bold">
+          <Link to="/" className="text-xl sm:text-2xl font-bold">
              <h1 className="animated-gradient-text">Tabacabeça</h1>
           </Link>
         </div>

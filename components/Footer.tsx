@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   const devWhatsAppLink = `https://wa.me/${DEV_WHATSAPP_NUMBER}?text=${devMessage}`;
 
   return (
-    <footer className="w-full py-6 px-4 mt-12 text-center text-[#422B0D]">
+    <footer className="w-full py-4 sm:py-6 px-4 mt-8 sm:mt-12 text-center text-[#422B0D]">
       <div className="container mx-auto">
         <a
           href={devWhatsAppLink}

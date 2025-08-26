@@ -12,7 +12,7 @@ const App: React.FC = () => {
         <Background />
         <div className="relative z-10 flex flex-col min-h-screen">
           <Header />
-          <main className="flex-grow pt-24 pb-12">
+          <main className="flex-grow pt-20 sm:pt-24 pb-8 sm:pb-12">
             <Routes>
               <Route path="/" element={<HomePage />} />
             </Routes>
