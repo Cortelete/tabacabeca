@@ -155,9 +155,60 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             </Modal>
 
             <Modal isOpen={isProgramacaoModalOpen} onClose={() => setIsProgramacaoModalOpen(false)} title="Programação">
-                <div className="text-center">
-                    <p className="text-lg">Em construção! 🚧</p>
-                    <p className="text-amber-300 mt-2">Em breve a programação completa da semana estará disponível aqui.</p>
+                 <div className="text-left space-y-3 text-sm text-amber-100">
+                    <div className="text-center bg-amber-400/80 p-1.5 rounded-md mb-3">
+                        <h3 className="font-black text-sm text-[#422B0D] tracking-wider">PROGRAMAÇÃO DA SEMANA</h3>
+                        <p className="font-bold text-xs text-[#422B0D]">27/08 À 30/08</p>
+                    </div>
+
+                    <div className="border-b border-amber-400/20 pb-2">
+                         <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
+                            <h4 className="text-base font-bold text-amber-200 tracking-wide">QUARTA-FEIRA</h4>
+                            <div className="text-xs shrink-0">
+                                <span className="font-semibold animated-gradient-time">🕒 20:00</span>
+                                <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
+                            </div>
+                        </div>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">RÁDIO EXODUS:</strong> Rap e reggae pra alegrar a rapa + promoções no bar.</p>
+                    </div>
+
+                    <div className="border-b border-amber-400/20 pb-2">
+                        <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
+                            <h4 className="text-base font-bold text-amber-200 tracking-wide">QUINTA-FEIRA</h4>
+                            <div className="text-xs shrink-0">
+                                <span className="font-semibold animated-gradient-time">🕒 20:00</span>
+                                <span className="font-bold animated-gradient-price-paid ml-2">💸 R$10 ANTECIPADO</span>
+                            </div>
+                        </div>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">BANDA LEVI RAS / AO VIVO:</strong> Diretamente de SP apresentando a TOUR MARLEY LOVE + artistas locais convidados.</p>
+                    </div>
+
+                    <div className="border-b border-amber-400/20 pb-2">
+                        <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
+                            <h4 className="text-base font-bold text-amber-200 tracking-wide">SEXTA-FEIRA</h4>
+                            <div className="text-xs shrink-0">
+                                <span className="font-semibold animated-gradient-time">🕒 20:00</span>
+                                <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
+                            </div>
+                        </div>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">OPEN DECKS / DISCOTECAGEM:</strong> Traga suas tracks e cola pirar num som.</p>
+                    </div>
+                    
+                    <div>
+                         <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
+                            <h4 className="text-base font-bold text-amber-200 tracking-wide">SÁBADO</h4>
+                            <div className="text-xs shrink-0">
+                                <span className="font-semibold animated-gradient-time">🕒 19:00</span>
+                                <span className="font-bold animated-gradient-price-paid ml-2">💸 R$10 / LISTA ANIVERS.</span>
+                            </div>
+                        </div>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">NUNO + SIDE + FUMAÇA DE QUINTAL:</strong> residentes da casa em celebração ao aniversário do Dejay Nuno!</p>
+                    </div>
+                    
+                    <div className="text-center bg-amber-400/80 p-2 rounded-md !mt-4">
+                        <p className="font-black text-sm text-[#422B0D]">COZINHA ABERTA DE QUINTA À SÁBADO.</p>
+                        <p className="font-bold text-xs text-[#422B0D]">DAS 18:30 ÀS 22:00</p>
+                    </div>
                 </div>
             </Modal>
 
@@ -217,6 +268,30 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             }
             .animated-gradient-text {
               background-image: linear-gradient(90deg, #f59e0b, #fed7aa, #f59e0b);
+              background-size: 200% auto;
+              color: transparent;
+              -webkit-background-clip: text;
+              background-clip: text;
+              animation: gradient-text-flow 5s linear infinite;
+            }
+            .animated-gradient-price-free {
+              background-image: linear-gradient(90deg, #16a34a, #bef264, #16a34a);
+              background-size: 200% auto;
+              color: transparent;
+              -webkit-background-clip: text;
+              background-clip: text;
+              animation: gradient-text-flow 4s linear infinite;
+            }
+            .animated-gradient-price-paid {
+              background-image: linear-gradient(90deg, #f59e0b, #fcd34d, #f59e0b);
+              background-size: 200% auto;
+              color: transparent;
+              -webkit-background-clip: text;
+              background-clip: text;
+              animation: gradient-text-flow 4s linear infinite;
+            }
+            .animated-gradient-time {
+              background-image: linear-gradient(90deg, #fef3c7, #fed7aa, #fef3c7);
               background-size: 200% auto;
               color: transparent;
               -webkit-background-clip: text;
