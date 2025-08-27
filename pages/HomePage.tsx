@@ -87,6 +87,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
     const [isTicketsModalOpen, setIsTicketsModalOpen] = useState(false);
     const [isProgramacaoModalOpen, setIsProgramacaoModalOpen] = useState(false);
+    const [isHorarioModalOpen, setIsHorarioModalOpen] = useState(false);
 
     const handleRating = (rate: number) => {
       if (rate === 5) {
@@ -114,6 +115,9 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                     <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação</ActionButton>
 
                     <ActionButton href={GOOGLE_MAPS_URL} external onExternalClick={onExternalClick}>Como Chegar</ActionButton>
+                    
+                    <ActionButton onClick={() => setIsHorarioModalOpen(true)}>Horário de Funcionamento</ActionButton>
+                    
                     <ActionButton onClick={() => setIsAboutModalOpen(true)}>Sobre Mim</ActionButton>
 
                     <div className="w-full p-2 rounded-lg bg-amber-200/10 bg-clip-padding backdrop-filter backdrop-blur-md border border-amber-400/30 mt-1">
@@ -211,6 +215,32 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                     </div>
                 </div>
             </Modal>
+
+            <Modal isOpen={isHorarioModalOpen} onClose={() => setIsHorarioModalOpen(false)} title="Horário de Funcionamento">
+                <div className="text-center space-y-4 text-amber-100">
+                    <div>
+                        <div className="inline-block bg-amber-400/80 px-3 py-1 rounded-md mb-2">
+                            <h3 className="font-black text-sm text-[#422B0D] tracking-wider">TABACARIA/HEADSHOP</h3>
+                        </div>
+                        <div className="space-y-1 text-amber-200 text-sm">
+                            <p><strong className="text-amber-100">TERÇA:</strong> 12H - 20H</p>
+                            <p><strong className="text-amber-100">QUARTA - SEXTA:</strong> 12H - 22H</p>
+                            <p><strong className="text-amber-100">SÁBADO:</strong> 16H20 - 22H</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="inline-block bg-amber-400/80 px-3 py-1 rounded-md mb-2">
+                            <h3 className="font-black text-sm text-[#422B0D] tracking-wider">TABAS BAR</h3>
+                        </div>
+                        <div className="space-y-1 text-amber-200 text-sm">
+                            <p><strong className="text-amber-100">QUARTA - SEXTA:</strong> 19H</p>
+                            <p><strong className="text-amber-100">SÁBADO:</strong> 16H20</p>
+                        </div>
+                    </div>
+                    <p className="text-xs italic text-amber-300 pt-2">*DOMINGO - SÓ SE DER VONTADE</p>
+                </div>
+            </Modal>
+
 
             <Modal isOpen={isFeedbackModalOpen} onClose={() => setIsFeedbackModalOpen(false)} title="Conte-nos como podemos melhorar">
                 <form action={`https://formsubmit.co/${FORM_SUBMIT_EMAIL}`} method="POST" className="space-y-4">
