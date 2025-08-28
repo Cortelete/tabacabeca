@@ -15,8 +15,6 @@ const App: React.FC = () => {
   const [devContactName, setDevContactName] = useState('');
 
   useEffect(() => {
-      // FIX: Use ReturnType for timer handles to ensure browser compatibility.
-      // The return types of setTimeout and setInterval in the browser are numbers, not NodeJS.Timeout.
       let timer: ReturnType<typeof setTimeout>;
       let countdownInterval: ReturnType<typeof setInterval>;
 
@@ -35,8 +33,13 @@ const App: React.FC = () => {
 
           timer = setTimeout(() => {
               if (redirectUrl) {
-                window.open(redirectUrl, '_blank');
+                // Instead of window.open(), use window.location.href to navigate.
+                // This is more reliable in mobile/in-app browsers (like Instagram's)
+                // which often block pop-ups triggered after a delay (setTimeout).
+                // This navigates the current tab, fulfilling the request to "change the page".
+                window.location.href = redirectUrl;
               }
+              // This part might not execute if navigation is successful, which is fine.
               setIsRedirectModalOpen(false);
               setRedirectUrl('');
           }, 3000);
