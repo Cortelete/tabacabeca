@@ -97,7 +97,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
       }
     };
     
-    const ticketsUrl = "https://uticket.com.br/event/01LA2F9IOIMI1E?fbclid=PARlRTSAMYbf5leHRuA2FlbQIxMQABpzOQdKhAWyjcloTwTq0BzOMF7BSUsHP2eozkLLGFj0o81PiEETQ9EtkIrlrz_aem_yHIxF0iGOelUeiQ86AepSQ";
+    const ticketsUrl = "https://pixta.me/u/sambazooka-1a-edicao-do-retorno?fbclid=PAZXh0bgNhZW0CMTEAAaewnBQV_GRH90FK-BELIiBrd9pSFSGXRwjWswUyOp5PgeIlklzaOmOC-7X_IQ_aem_HLjiQ6-SUh4od1hcslYpNw";
 
     return (
         <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center h-full py-2 sm:py-4">
@@ -136,18 +136,19 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </div>
             </Modal>
             
-            <Modal isOpen={isTicketsModalOpen} onClose={() => setIsTicketsModalOpen(false)} title="Levi Ras em Ponta Grossa">
+            <Modal isOpen={isTicketsModalOpen} onClose={() => setIsTicketsModalOpen(false)} title="SAMBAZOOKA!">
                 <div className="text-center space-y-4">
                     <div>
-                        <p className="font-semibold text-amber-200">Quinta, 28 de Agosto • 19:00</p>
+                        <p className="font-semibold text-amber-200">Sexta, 06 de Setembro • 16:20</p>
                         <p className="text-sm text-amber-300">@ Tabacabeça Tabacaria e Headshop</p>
                     </div>
                     <p className="text-amber-300 text-sm">
-                        Levi Ras, banda de Reggae paulistana com 12 anos de estrada, apresenta um show inesquecível com clássicos do Rei do Reggae e canções autorais. Tendo dividido o palco com gigantes como Jorge Ben Jor e Marcelo D2, a banda agora chega para uma noite de pura vibe positiva com a turnê:
+                        DJ Cisco & Johnny Freitas comandam uma viagem sonora única com o melhor da Música Brasileira, Hip-Hop, Boogie & Grooves Universais.
                     </p>
-                    <div className="py-4">
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-black animated-gradient-text tracking-wider">MarleyLove / Vamos Viajar</h3>
+                    <div className="py-2">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-black animated-gradient-text tracking-wider">SAMBAZOOKA!</h3>
                     </div>
+                    <p className="text-amber-200 font-bold">Ingressos antecipados: R$10</p>
                     <button 
                         onClick={() => onExternalClick(ticketsUrl)}
                         className="inline-block relative group overflow-hidden w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 hover:bg-amber-700 !mt-6"
