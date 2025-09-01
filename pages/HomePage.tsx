@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
 import { GOOGLE_MAPS_URL, GOOGLE_REVIEW_URL, FORM_SUBMIT_EMAIL } from '../constants';
@@ -82,6 +82,33 @@ interface HomePageProps {
   onExternalClick: (url: string) => void;
 }
 
+const quotes = [
+    'A erva é a cura da nação 🌿🔥 – Bob Marley',
+    'Onde não há amor, não há verdade. – Mahatma Gandhi',
+    'Amai-vos uns aos outros, como eu vos amei. – João 13:34',
+    'A paz vem de dentro. Não a procure à sua volta. – Buda',
+    'A vida é o que acontece enquanto você está ocupado fazendo outros planos. – John Lennon',
+    'Tudo o que você precisa é amor. – The Beatles',
+    'Seja a mudança que você quer ver no mundo. – Mahatma Gandhi',
+    'O sol é para todos, mas a sombra é para poucos.',
+    'Não se preocupe com nada, porque tudo vai ficar bem. – Bob Marley',
+    'O amor é a força mais sutil do mundo. – Mahatma Gandhi',
+    'A felicidade não é algo pronto. Ela vem de suas próprias ações. – Dalai Lama',
+    'O fraco nunca pode perdoar. O perdão é um atributo dos fortes. – Mahatma Gandhi',
+    'Tudo posso naquele que me fortalece. – Filipenses 4:13',
+    'A imaginação é mais importante que o conhecimento. – Albert Einstein',
+    'A única maneira de fazer um excelente trabalho é amar o que você faz. – Steve Jobs',
+    'A persistência é o caminho do êxito. – Charles Chaplin',
+    'Acredite em si mesmo e tudo será possível.',
+    'A música pode mudar o mundo. – Ludwig van Beethoven',
+    'A liberdade de ser você mesmo é a maior das conquistas.',
+    'Viva, ame, queime, floresça.',
+    'A vida é uma viagem, aproveite a paisagem.',
+    'Paz, amor e um baseado pra relaxar.',
+    'Plante o bem, que o resto vem.',
+];
+
+
 const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
@@ -90,6 +117,20 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isHorarioModalOpen, setIsHorarioModalOpen] = useState(false);
     const [isComoChegarModalOpen, setIsComoChegarModalOpen] = useState(false);
     const [isSpinning, setIsSpinning] = useState(false);
+    const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+    const [isQuoteVisible, setIsQuoteVisible] = useState(true);
+
+     useEffect(() => {
+        const quoteInterval = setInterval(() => {
+            setIsQuoteVisible(false); // Start fade out
+            setTimeout(() => {
+                setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+                setIsQuoteVisible(true); // Start fade in
+            }, 700); // Should match the fade out duration
+        }, 7000); // Change quote every 7 seconds
+
+        return () => clearInterval(quoteInterval);
+    }, []);
 
     const handleLogoSpin = () => {
         if (isSpinning) return;
@@ -113,7 +154,9 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
 
                 <img src="/logo.png" alt="Tabacabeça Logo" className="w-24 sm:w-32 h-auto mb-2 transition-transform duration-300 hover:scale-105" />
                 <h1 className="text-xl sm:text-3xl font-bold mb-1 animated-gradient-title">Tabacabeça</h1>
-                <p className="text-amber-200 italic mb-3 sm:mb-4 text-xs sm:text-sm">“A erva é a cura da nação 🌿🔥 – Bob Marley”</p>
+                <p className={`text-amber-200 italic mb-3 sm:mb-4 text-xs sm:text-sm transition-opacity duration-700 min-h-[28px] sm:min-h-[32px] flex items-center justify-center ${isQuoteVisible ? 'opacity-100' : 'opacity-0'}`}>
+                    “{quotes[currentQuoteIndex]}”
+                </p>
 
                 <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
                     <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
