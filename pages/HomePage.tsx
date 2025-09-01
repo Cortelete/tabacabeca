@@ -88,6 +88,14 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isTicketsModalOpen, setIsTicketsModalOpen] = useState(false);
     const [isProgramacaoModalOpen, setIsProgramacaoModalOpen] = useState(false);
     const [isHorarioModalOpen, setIsHorarioModalOpen] = useState(false);
+    const [isComoChegarModalOpen, setIsComoChegarModalOpen] = useState(false);
+    const [isSpinning, setIsSpinning] = useState(false);
+
+    const handleLogoSpin = () => {
+        if (isSpinning) return;
+        setIsSpinning(true);
+        setTimeout(() => setIsSpinning(false), 1000);
+    };
 
     const handleRating = (rate: number) => {
       if (rate === 5) {
@@ -114,11 +122,11 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                     
                     <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação</ActionButton>
 
-                    <ActionButton href={GOOGLE_MAPS_URL} external onExternalClick={onExternalClick}>Como Chegar</ActionButton>
+                    <ActionButton onClick={() => setIsComoChegarModalOpen(true)}>Como Chegar</ActionButton>
                     
                     <ActionButton onClick={() => setIsHorarioModalOpen(true)}>Horário de Funcionamento</ActionButton>
                     
-                    <ActionButton onClick={() => setIsAboutModalOpen(true)}>Sobre Mim</ActionButton>
+                    <ActionButton onClick={() => setIsAboutModalOpen(true)}>Sobre Nós</ActionButton>
 
                     <div className="w-full p-2 rounded-lg bg-amber-200/10 bg-clip-padding backdrop-filter backdrop-blur-md border border-amber-400/30 mt-1">
                       <p className="font-semibold mb-1 text-amber-100 text-sm">Avalie sua experiência</p>
@@ -127,12 +135,58 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </div>
             </div>
             
-            <Modal isOpen={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)} title="Sobre Mim">
-                <div className="text-center">
-                    <h3 className="text-xl font-bold mb-2">Tabacabeça Headshop e Tabacaria</h3>
-                    <p className="mb-2">HEADSHOP • DRINKS • MÚSICA 🎶</p>
-                    <p className="mb-4">Rolê suave pra gente suave ✨</p>
-                    <p>📍 Rua Julio de Castilho, 755 – Centro.</p>
+            <Modal isOpen={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)} title="Sobre Nós">
+                <div className="text-center space-y-4 text-amber-200">
+                    <p className="text-lg">
+                        Tabacabeça nasceu de um sonho compartilhado entre dois amigos de infância.
+                    </p>
+                    <blockquote className="border-l-4 border-amber-500 pl-4 py-2 my-2 text-left bg-amber-900/20 rounded-r-md">
+                        <p className="italic text-amber-100">Cansados da mesmice, eles decidiram criar um refúgio na cidade natal: um lugar onde a boa música, drinks de primeira e uma vibe relaxante se encontram.</p>
+                    </blockquote>
+                    <p className="font-semibold text-amber-100 pt-2">
+                        Mais que um bar, é a nossa casa. Um ponto de encontro para gente suave que aprecia a cultura e a amizade.
+                    </p>
+                    
+                    <div className="pt-4 flex flex-col items-center gap-2">
+                         <p className="text-lg font-bold text-amber-100">
+                            Seja bem-vindo à família Tabacabeça! ✨
+                        </p>
+                        <div className="w-24 h-24" style={{ perspective: '1000px' }}>
+                            <img 
+                                src="/logo.png" 
+                                alt="Tabacabeça Logo Coin" 
+                                title="Clique para girar!"
+                                className={`w-full h-full cursor-pointer transition-transform duration-1000 drop-shadow-[0_5px_15px_rgba(251,191,36,0.3)] hover:drop-shadow-[0_5px_20px_rgba(251,191,36,0.5)] ${isSpinning ? 'animate-coin-spin' : ''}`}
+                                style={{ transformStyle: 'preserve-3d' }}
+                                onClick={handleLogoSpin}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
+             <Modal isOpen={isComoChegarModalOpen} onClose={() => setIsComoChegarModalOpen(false)} title="Como Chegar">
+                <div className="text-center space-y-4">
+                    <div>
+                        <h3 className="text-xl font-bold text-amber-100 mb-1">Nosso Endereço</h3>
+                        <p className="text-lg text-amber-200">Rua Julio de Castilho, 755 – Centro.</p>
+                    </div>
+                    <div>
+                        <h3 className="text-lg font-semibold text-amber-100 mb-1">Dica de Localização</h3>
+                        <p className="text-amber-300">
+                           Ficamos bem no coração do centro. Procure pelo lugar mais legal e pela melhor música. Não tem erro!
+                        </p>
+                    </div>
+                    <button 
+                        onClick={() => {
+                            setIsComoChegarModalOpen(false);
+                            onExternalClick(GOOGLE_MAPS_URL);
+                        }}
+                        className="inline-block relative group overflow-hidden w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 hover:bg-amber-700 !mt-6"
+                    >
+                        <span className="relative z-10">Ver Rota no Google Maps 🗺️</span>
+                        <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-300 ease-out"></div>
+                    </button>
                 </div>
             </Modal>
             
@@ -163,7 +217,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                  <div className="text-left space-y-3 text-sm text-amber-100">
                     <div className="text-center bg-amber-400/80 p-1.5 rounded-md mb-3">
                         <h3 className="font-black text-sm text-[#422B0D] tracking-wider">PROGRAMAÇÃO DA SEMANA</h3>
-                        <p className="font-bold text-xs text-[#422B0D]">27/08 À 30/08</p>
                     </div>
 
                     <div className="border-b border-amber-400/20 pb-2">
@@ -174,7 +227,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                                 <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
                             </div>
                         </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">RÁDIO EXODUS:</strong> Rap e reggae pra alegrar a rapa + promoções no bar.</p>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Fumaça de Quintal:</strong> O melhor do Samba Rock e MPB para animar sua noite.</p>
                     </div>
 
                     <div className="border-b border-amber-400/20 pb-2">
@@ -182,13 +235,13 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                             <h4 className="text-base font-bold text-amber-200 tracking-wide">QUINTA-FEIRA</h4>
                             <div className="text-xs shrink-0">
                                 <span className="font-semibold animated-gradient-time">🕒 20:00</span>
-                                <span className="font-bold animated-gradient-price-paid ml-2">💸 R$10 ANTECIPADO</span>
+                                <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
                             </div>
                         </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">BANDA LEVI RAS / AO VIVO:</strong> Diretamente de SP apresentando a TOUR MARLEY LOVE + artistas locais convidados.</p>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Open Decks:</strong> A noite é dos DJs! Venha mostrar seu som ou curtir sets variados.</p>
                     </div>
 
-                    <div className="border-b border-amber-400/20 pb-2">
+                    <div className="pb-2">
                         <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
                             <h4 className="text-base font-bold text-amber-200 tracking-wide">SEXTA-FEIRA</h4>
                             <div className="text-xs shrink-0">
@@ -196,22 +249,11 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                                 <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
                             </div>
                         </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">OPEN DECKS / DISCOTECAGEM:</strong> Traga suas tracks e cola pirar num som.</p>
-                    </div>
-                    
-                    <div>
-                         <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
-                            <h4 className="text-base font-bold text-amber-200 tracking-wide">SÁBADO</h4>
-                            <div className="text-xs shrink-0">
-                                <span className="font-semibold animated-gradient-time">🕒 19:00</span>
-                                <span className="font-bold animated-gradient-price-paid ml-2">💸 R$10 / LISTA ANIVERS.</span>
-                            </div>
-                        </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">NUNO + SIDE + FUMAÇA DE QUINTAL:</strong> residentes da casa em celebração ao aniversário do Dejay Nuno!</p>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Sossegado Roots:</strong> Paz e positividade com o melhor do Reggae Roots pra começar bem o fds.</p>
                     </div>
                     
                     <div className="text-center bg-amber-400/80 p-2 rounded-md !mt-4">
-                        <p className="font-black text-sm text-[#422B0D]">COZINHA ABERTA DE QUINTA À SÁBADO.</p>
+                        <p className="font-black text-sm text-[#422B0D]">COZINHA ABERTA DE QUINTA A SÁBADO.</p>
                         <p className="font-bold text-xs text-[#422B0D]">DAS 18:30 ÀS 22:00</p>
                     </div>
                 </div>
@@ -296,6 +338,17 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
               50% {
                 transform: scale(1.03);
               }
+            }
+            @keyframes coin-spin {
+              from {
+                transform: rotateY(0deg);
+              }
+              to {
+                transform: rotateY(360deg);
+              }
+            }
+            .animate-coin-spin {
+              animation: coin-spin 1s ease-out;
             }
             .animated-gradient-text {
               background-image: linear-gradient(90deg, #f59e0b, #fed7aa, #f59e0b);
