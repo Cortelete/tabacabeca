@@ -146,13 +146,22 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
       }
     };
     
-    const ticketsUrl = "https://pixta.me/u/sambazooka-1a-edicao-do-retorno?fbclid=PAZXh0bgNhZW0CMTEAAaewnBQV_GRH90FK-BELIiBrd9pSFSGXRwjWswUyOp5PgeIlklzaOmOC-7X_IQ_aem_HLjiQ6-SUh4od1hcslYpNw";
+    const ticketsUrl = "https://pixta.me/u/sambazooka-1a-edicao-do-retorno";
 
     return (
         <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center h-full py-2 sm:py-4">
             <div className="w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center">
 
-                <img src="/logo.png" alt="Tabacabeça Logo" className="w-24 sm:w-32 h-auto mb-2 transition-transform duration-300 hover:scale-105" />
+                <div className="w-24 h-24 sm:w-32 sm:h-32 mb-2" style={{ perspective: '1000px' }}>
+                    <img 
+                        src="/logo.png" 
+                        alt="Tabacabeça Logo" 
+                        title="Clique para girar!"
+                        className={`w-full h-full cursor-pointer transition-transform duration-1000 drop-shadow-[0_5px_15px_rgba(251,191,36,0.3)] hover:drop-shadow-[0_5px_20px_rgba(251,191,36,0.5)] ${isSpinning ? 'animate-coin-spin' : ''}`}
+                        style={{ transformStyle: 'preserve-3d' }}
+                        onClick={handleLogoSpin}
+                    />
+                </div>
                 <h1 className="text-xl sm:text-3xl font-bold mb-1 animated-gradient-title">Tabacabeça</h1>
                 <p className={`text-amber-200 italic mb-3 sm:mb-4 text-xs sm:text-sm transition-opacity duration-700 min-h-[28px] sm:min-h-[32px] flex items-center justify-center ${isQuoteVisible ? 'opacity-100' : 'opacity-0'}`}>
                     “{quotes[currentQuoteIndex]}”
@@ -236,7 +245,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             <Modal isOpen={isTicketsModalOpen} onClose={() => setIsTicketsModalOpen(false)} title="SAMBAZOOKA!">
                 <div className="text-center space-y-4">
                     <div>
-                        <p className="font-semibold text-amber-200">Sexta, 06 de Setembro • 16:20</p>
+                        <p className="font-semibold text-amber-200">Sábado • 16:20</p>
                         <p className="text-sm text-amber-300">@ Tabacabeça Tabacaria e Headshop</p>
                     </div>
                     <p className="text-amber-300 text-sm">
@@ -270,7 +279,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                                 <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
                             </div>
                         </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Fumaça de Quintal:</strong> O melhor do Samba Rock e MPB para animar sua noite.</p>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Fumaça de Quintal:</strong> Samba & de Tudo um Pouco</p>
                     </div>
 
                     <div className="border-b border-amber-400/20 pb-2">
@@ -281,10 +290,10 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                                 <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
                             </div>
                         </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Open Decks:</strong> A noite é dos DJs! Venha mostrar seu som ou curtir sets variados.</p>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Open Decks:</strong> A noite é dos DJs! Venha mostrar seu som ou curtir sets variados + DJ convidado</p>
                     </div>
 
-                    <div className="pb-2">
+                    <div className="border-b border-amber-400/20 pb-2">
                         <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
                             <h4 className="text-base font-bold text-amber-200 tracking-wide">SEXTA-FEIRA</h4>
                             <div className="text-xs shrink-0">
@@ -293,6 +302,31 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                             </div>
                         </div>
                         <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Sossegado Roots:</strong> Paz e positividade com o melhor do Reggae Roots pra começar bem o fds.</p>
+                    </div>
+                    
+                    <div className="border-b border-amber-400/20 pb-2">
+                        <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
+                            <h4 className="text-base font-bold text-amber-200 tracking-wide">SÁBADO</h4>
+                            <div className="text-xs shrink-0">
+                                <span className="font-semibold animated-gradient-time">🕒 16:20</span>
+                                <span className="font-bold animated-gradient-price-paid ml-2">🎟️ R$10</span>
+                            </div>
+                        </div>
+                        <p className="text-amber-200 leading-snug">
+                            <strong className="text-amber-100">SAMBAZOOKA!:</strong> Evento especial com ingresso. 
+                            <button onClick={() => { setIsProgramacaoModalOpen(false); setIsTicketsModalOpen(true); }} className="ml-1 font-bold text-amber-300 underline hover:text-amber-100 transition-colors bg-transparent border-none p-0 cursor-pointer">Clique para comprar!</button>
+                        </p>
+                    </div>
+
+                    <div className="pb-2">
+                        <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
+                            <h4 className="text-base font-bold text-amber-200 tracking-wide">DOMINGO</h4>
+                            <div className="text-xs shrink-0">
+                                <span className="font-semibold animated-gradient-time">🕒 16:20</span>
+                                <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
+                            </div>
+                        </div>
+                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">P4 Sesh #05:</strong> 5ª Sessão + artistas convidados e exposição de arte.</p>
                     </div>
                     
                     <div className="text-center bg-amber-400/80 p-2 rounded-md !mt-4">
