@@ -108,12 +108,47 @@ const quotes = [
     'Plante o bem, que o resto vem.',
 ];
 
+const programacaoData = [
+  {
+    title: 'Semana 1: 02/09 - 08/09',
+    events: [
+      { day: 'SEX. 05', name: 'DJ NUNO, SID & IGÃO', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'SÁB. 06', name: 'SAMBAZOOKA', price: 'R$10', priceClass: 'animated-gradient-price-paid', icon: '🎟️', ticket: true },
+      { day: 'DOM. 07', name: 'P4 SESH #05: POCKET FORMIGA JUCA', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+    ]
+  },
+  {
+    title: 'Semana 2: 09/09 - 15/09',
+    events: [
+      { day: 'SEX. 12', name: 'DON CARLO', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'SÁB. 13', name: 'CAIXA PRETA', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+    ]
+  },
+  {
+    title: 'Semana 3: 16/09 - 22/09',
+    events: [
+      { day: 'SEX. 19', name: 'ROCK DE PONTA', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'SÁB. 20', name: 'AFROHIGH', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'DOM. 21', name: 'MATULA ROOTS + CASTANHEIRA', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+    ]
+  },
+    {
+    title: 'Semana 4: 23/09 - 29/09',
+    events: [
+      { day: 'SEX. 26', name: 'DJ NUNO, SID & IGÃO', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'SÁB. 27', name: 'STANLEY', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'DOM. 28', name: 'DIA DE FEIRA COM BFACE + RESIDENTES', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+    ]
+  }
+];
+
 
 const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
     const [isTicketsModalOpen, setIsTicketsModalOpen] = useState(false);
     const [isProgramacaoModalOpen, setIsProgramacaoModalOpen] = useState(false);
+    const [openWeekIndex, setOpenWeekIndex] = useState<number | null>(0);
     const [isHorarioModalOpen, setIsHorarioModalOpen] = useState(false);
     const [isComoChegarModalOpen, setIsComoChegarModalOpen] = useState(false);
     const [isSpinning, setIsSpinning] = useState(false);
@@ -266,67 +301,61 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             </Modal>
 
             <Modal isOpen={isProgramacaoModalOpen} onClose={() => setIsProgramacaoModalOpen(false)} title="Programação">
-                 <div className="text-left space-y-3 text-sm text-amber-100">
+                 <div className="text-left space-y-3 text-sm text-amber-100 max-h-[70vh] overflow-y-auto pr-2">
                     <div className="text-center bg-amber-400/80 p-1.5 rounded-md mb-3">
-                        <h3 className="font-black text-sm text-[#422B0D] tracking-wider">PROGRAMAÇÃO DA SEMANA</h3>
+                        <h3 className="font-black text-sm text-[#422B0D] tracking-wider">AGENDA SETEMBRO</h3>
                     </div>
 
-                    <div className="border-b border-amber-400/20 pb-2">
-                         <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
-                            <h4 className="text-base font-bold text-amber-200 tracking-wide">QUARTA-FEIRA</h4>
-                            <div className="text-xs shrink-0">
-                                <span className="font-semibold animated-gradient-time">🕒 20:00</span>
-                                <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
-                            </div>
-                        </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Fumaça de Quintal:</strong> Samba & de Tudo um Pouco</p>
+                    <div className="space-y-3">
+                      <div className="border-b border-amber-400/20 pb-2">
+                          <div className="flex justify-between items-center mb-1">
+                              <h4 className="text-base font-bold text-amber-200 tracking-wide">TODA QUARTA</h4>
+                              <span className="font-bold animated-gradient-price-free ml-2 text-xs shrink-0">🎉 ENTRADA GRÁTIS</span>
+                          </div>
+                          <p className="text-amber-200 leading-snug"><strong className="text-amber-100">FUMACA DE QUINTAL</strong></p>
+                      </div>
+
+                      <div className="border-b border-amber-400/20 pb-2">
+                          <div className="flex justify-between items-center mb-1">
+                              <h4 className="text-base font-bold text-amber-200 tracking-wide">TODA QUINTA</h4>
+                              <span className="font-bold animated-gradient-price-free ml-2 text-xs shrink-0">🎉 ENTRADA GRÁTIS</span>
+                          </div>
+                          <p className="text-amber-200 leading-snug"><strong className="text-amber-100">OPEN DECKS</strong></p>
+                      </div>
                     </div>
 
-                    <div className="border-b border-amber-400/20 pb-2">
-                        <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
-                            <h4 className="text-base font-bold text-amber-200 tracking-wide">QUINTA-FEIRA</h4>
-                            <div className="text-xs shrink-0">
-                                <span className="font-semibold animated-gradient-time">🕒 20:00</span>
-                                <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
+                    <div className="pt-2 space-y-2">
+                      {programacaoData.map((week, index) => (
+                        <div key={index} className="border-b border-amber-400/20 last:border-b-0">
+                          <button 
+                            onClick={() => setOpenWeekIndex(index === openWeekIndex ? null : index)}
+                            className="w-full flex justify-between items-center text-left py-2 font-bold text-amber-200 hover:text-amber-100 transition-colors"
+                          >
+                            <span>{week.title}</span>
+                             <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 transition-transform duration-300 ${openWeekIndex === index ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </button>
+                          <div className={`transition-all duration-500 ease-in-out overflow-hidden ${openWeekIndex === index ? 'max-h-96' : 'max-h-0'}`}>
+                            <div className="pt-1 pb-3 pl-2 space-y-3">
+                              {week.events.map((event, eventIndex) => (
+                                <div key={eventIndex}>
+                                  <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
+                                      <h4 className="text-base font-bold text-amber-200 tracking-wide">{event.day}</h4>
+                                      <span className={`font-bold ${event.priceClass} ml-2 text-xs shrink-0`}>{event.icon} {event.price}</span>
+                                  </div>
+                                  <p className="text-amber-200 leading-snug">
+                                      <strong className="text-amber-100">{event.name}</strong>
+                                      {event.ticket && (
+                                          <button onClick={() => { setIsProgramacaoModalOpen(false); setIsTicketsModalOpen(true); }} className="ml-1 font-bold text-amber-300 underline hover:text-amber-100 transition-colors bg-transparent border-none p-0 cursor-pointer">Compre aqui!</button>
+                                      )}
+                                  </p>
+                                </div>
+                              ))}
                             </div>
+                          </div>
                         </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Open Decks:</strong> A noite é dos DJs! Venha mostrar seu som ou curtir sets variados + DJ convidado</p>
-                    </div>
-
-                    <div className="border-b border-amber-400/20 pb-2">
-                        <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
-                            <h4 className="text-base font-bold text-amber-200 tracking-wide">SEXTA-FEIRA</h4>
-                            <div className="text-xs shrink-0">
-                                <span className="font-semibold animated-gradient-time">🕒 20:00</span>
-                                <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
-                            </div>
-                        </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">Sossegado Roots:</strong> Paz e positividade com o melhor do Reggae Roots pra começar bem o fds.</p>
-                    </div>
-                    
-                    <div className="border-b border-amber-400/20 pb-2">
-                        <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
-                            <h4 className="text-base font-bold text-amber-200 tracking-wide">SÁBADO</h4>
-                            <div className="text-xs shrink-0">
-                                <span className="font-semibold animated-gradient-time">🕒 16:20</span>
-                                <span className="font-bold animated-gradient-price-paid ml-2">🎟️ R$10</span>
-                            </div>
-                        </div>
-                        <p className="text-amber-200 leading-snug">
-                            <strong className="text-amber-100">SAMBAZOOKA!:</strong> Evento especial com ingresso. 
-                            <button onClick={() => { setIsProgramacaoModalOpen(false); setIsTicketsModalOpen(true); }} className="ml-1 font-bold text-amber-300 underline hover:text-amber-100 transition-colors bg-transparent border-none p-0 cursor-pointer">Clique para comprar!</button>
-                        </p>
-                    </div>
-
-                    <div className="pb-2">
-                        <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
-                            <h4 className="text-base font-bold text-amber-200 tracking-wide">DOMINGO</h4>
-                            <div className="text-xs shrink-0">
-                                <span className="font-semibold animated-gradient-time">🕒 16:20</span>
-                                <span className="font-bold animated-gradient-price-free ml-2">🎉 ENTRADA GRÁTIS</span>
-                            </div>
-                        </div>
-                        <p className="text-amber-200 leading-snug"><strong className="text-amber-100">P4 Sesh #05:</strong> 5ª Sessão + artistas convidados e exposição de arte.</p>
+                      ))}
                     </div>
                     
                     <div className="text-center bg-amber-400/80 p-2 rounded-md !mt-4">
