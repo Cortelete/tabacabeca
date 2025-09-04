@@ -112,32 +112,32 @@ const programacaoData = [
   {
     title: 'Semana 1: 02/09 - 08/09',
     events: [
-      { day: 'SEX. 05', name: 'DJ NUNO, SID & IGÃO', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
-      { day: 'SÁB. 06', name: 'SAMBAZOOKA', price: 'R$10', priceClass: 'animated-gradient-price-paid', icon: '🎟️', ticket: true },
-      { day: 'DOM. 07', name: 'P4 SESH #05: POCKET FORMIGA JUCA', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'SEX. 05', name: 'DJ NUNO, SID & IGÃO' },
+      { day: 'SÁB. 06', name: 'SAMBAZOOKA' },
+      { day: 'DOM. 07', name: 'P4 SESH #05: POCKET FORMIGA JUCA' },
     ]
   },
   {
     title: 'Semana 2: 09/09 - 15/09',
     events: [
-      { day: 'SEX. 12', name: 'DON CARLO', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
-      { day: 'SÁB. 13', name: 'CAIXA PRETA', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'SEX. 12', name: 'DON CARLO' },
+      { day: 'SÁB. 13', name: 'CAIXA PRETA' },
     ]
   },
   {
     title: 'Semana 3: 16/09 - 22/09',
     events: [
-      { day: 'SEX. 19', name: 'ROCK DE PONTA', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
-      { day: 'SÁB. 20', name: 'AFROHIGH', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
-      { day: 'DOM. 21', name: 'MATULA ROOTS + CASTANHEIRA', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'SEX. 19', name: 'ROCK DE PONTA' },
+      { day: 'SÁB. 20', name: 'AFROHIGH' },
+      { day: 'DOM. 21', name: 'MATULA ROOTS + CASTANHEIRA' },
     ]
   },
     {
     title: 'Semana 4: 23/09 - 29/09',
     events: [
-      { day: 'SEX. 26', name: 'DJ NUNO, SID & IGÃO', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
-      { day: 'SÁB. 27', name: 'STANLEY', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
-      { day: 'DOM. 28', name: 'DIA DE FEIRA COM BFACE + RESIDENTES', price: 'GRÁTIS', priceClass: 'animated-gradient-price-free', icon: '🎉' },
+      { day: 'SEX. 26', name: 'DJ NUNO, SID & IGÃO' },
+      { day: 'SÁB. 27', name: 'STANLEY' },
+      { day: 'DOM. 28', name: 'DIA DE FEIRA COM BFACE + RESIDENTES' },
     ]
   }
 ];
@@ -310,7 +310,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                       <div className="border-b border-amber-400/20 pb-2">
                           <div className="flex justify-between items-center mb-1">
                               <h4 className="text-base font-bold text-amber-200 tracking-wide">TODA QUARTA</h4>
-                              <span className="font-bold animated-gradient-price-free ml-2 text-xs shrink-0">🎉 ENTRADA GRÁTIS</span>
                           </div>
                           <p className="text-amber-200 leading-snug"><strong className="text-amber-100">FUMACA DE QUINTAL</strong></p>
                       </div>
@@ -318,7 +317,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                       <div className="border-b border-amber-400/20 pb-2">
                           <div className="flex justify-between items-center mb-1">
                               <h4 className="text-base font-bold text-amber-200 tracking-wide">TODA QUINTA</h4>
-                              <span className="font-bold animated-gradient-price-free ml-2 text-xs shrink-0">🎉 ENTRADA GRÁTIS</span>
                           </div>
                           <p className="text-amber-200 leading-snug"><strong className="text-amber-100">OPEN DECKS</strong></p>
                       </div>
@@ -342,13 +340,9 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                                 <div key={eventIndex}>
                                   <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
                                       <h4 className="text-base font-bold text-amber-200 tracking-wide">{event.day}</h4>
-                                      <span className={`font-bold ${event.priceClass} ml-2 text-xs shrink-0`}>{event.icon} {event.price}</span>
                                   </div>
                                   <p className="text-amber-200 leading-snug">
                                       <strong className="text-amber-100">{event.name}</strong>
-                                      {event.ticket && (
-                                          <button onClick={() => { setIsProgramacaoModalOpen(false); setIsTicketsModalOpen(true); }} className="ml-1 font-bold text-amber-300 underline hover:text-amber-100 transition-colors bg-transparent border-none p-0 cursor-pointer">Compre aqui!</button>
-                                      )}
                                   </p>
                                 </div>
                               ))}
