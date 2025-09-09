@@ -26,6 +26,16 @@
         scrollbar-width: thin;
         scrollbar-color: #b45309 #fef3c7; /* thumb and track */
       }
+      
+      /* Hide scrollbar on mobile devices */
+      @media (max-width: 640px) {
+        ::-webkit-scrollbar {
+          display: none;
+        }
+        html {
+          scrollbar-width: none;
+        }
+      }
     </style>
   <script type="importmap">
 {
