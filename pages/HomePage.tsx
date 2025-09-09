@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
@@ -113,7 +114,6 @@ const programacaoData = [
     title: 'Semana 1: 02/09 - 08/09',
     events: [
       { day: 'SEX. 05', name: 'DJ NUNO, SID & IGÃO' },
-      { day: 'SÁB. 06', name: 'SAMBAZOOKA' },
       { day: 'DOM. 07', name: 'P4 SESH #05: POCKET FORMIGA JUCA' },
     ]
   },
@@ -155,6 +155,11 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
     const [isQuoteVisible, setIsQuoteVisible] = useState(true);
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize to the start of the day for accurate comparison
+    const currentYear = today.getFullYear();
+    const SEPTEMBER = 8; // Month is 0-indexed, so 8 is September.
+
      useEffect(() => {
         const quoteInterval = setInterval(() => {
             setIsQuoteVisible(false); // Start fade out
@@ -181,8 +186,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
       }
     };
     
-    const ticketsUrl = "https://pixta.me/u/sambazooka-1a-edicao-do-retorno";
-
     return (
         <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center h-full py-2 sm:py-4">
             <div className="w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center">
@@ -205,7 +208,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
                     <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
                     
-                    <ActionButton onClick={() => setIsTicketsModalOpen(true)}>Ingressos</ActionButton>
+                    <ActionButton onClick={() => setIsTicketsModalOpen(true)}>Entrada</ActionButton>
                     
                     <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação</ActionButton>
 
@@ -277,26 +280,23 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </div>
             </Modal>
             
-            <Modal isOpen={isTicketsModalOpen} onClose={() => setIsTicketsModalOpen(false)} title="SAMBAZOOKA!">
+            <Modal isOpen={isTicketsModalOpen} onClose={() => setIsTicketsModalOpen(false)} title="Entrada esse Sábado">
                 <div className="text-center space-y-4">
-                    <div>
-                        <p className="font-semibold text-amber-200">Sábado • 16:20</p>
-                        <p className="text-sm text-amber-300">@ Tabacabeça Tabacaria e Headshop</p>
+                    <div className="grid grid-cols-1 gap-4 text-center">
+                        <div className="bg-amber-900/30 p-4 rounded-lg border border-amber-500/30">
+                            <h3 className="font-bold text-amber-100 text-lg animated-gradient-time">ATÉ AS 16H</h3>
+                            <p className="text-3xl font-black mt-2 animated-gradient-price-free">GRATUITA</p>
+                            <p className="text-amber-300 text-xs mt-1">Chegue cedo e aproveite!</p>
+                        </div>
+                        <div className="bg-amber-900/30 p-4 rounded-lg border border-amber-500/30">
+                            <h3 className="font-bold text-amber-100 text-lg animated-gradient-time">APÓS AS 16H</h3>
+                            <p className="text-3xl font-black mt-2 animated-gradient-price-paid">R$10</p>
+                            <p className="text-amber-300 text-xs mt-1">Sua contribuição para a festa!</p>
+                        </div>
                     </div>
-                    <p className="text-amber-300 text-sm">
-                        DJ Cisco & Johnny Freitas comandam uma viagem sonora única com o melhor da Música Brasileira, Hip-Hop, Boogie & Grooves Universais.
+                    <p className="text-sm text-amber-300 pt-2">
+                        A lista de entrada gratuita é válida para quem chegar no local até o horário estipulado.
                     </p>
-                    <div className="py-2">
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-black animated-gradient-text tracking-wider">SAMBAZOOKA!</h3>
-                    </div>
-                    <p className="text-amber-200 font-bold">Ingressos antecipados: R$10</p>
-                    <button 
-                        onClick={() => onExternalClick(ticketsUrl)}
-                        className="inline-block relative group overflow-hidden w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 hover:bg-amber-700 !mt-6"
-                    >
-                        <span className="relative z-10">Garantir meu Ingresso</span>
-                        <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-300 ease-out"></div>
-                    </button>
                 </div>
             </Modal>
 
@@ -336,16 +336,22 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                           </button>
                           <div className={`transition-all duration-500 ease-in-out overflow-hidden ${openWeekIndex === index ? 'max-h-96' : 'max-h-0'}`}>
                             <div className="pt-1 pb-3 pl-2 space-y-3">
-                              {week.events.map((event, eventIndex) => (
-                                <div key={eventIndex}>
+                              {week.events.map((event, eventIndex) => {
+                                const day = parseInt(event.day.split(' ')[1], 10);
+                                const eventDate = new Date(currentYear, SEPTEMBER, day);
+                                const isPast = eventDate < today;
+
+                                return (
+                                <div key={eventIndex} className={isPast ? 'opacity-60' : ''}>
                                   <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
                                       <h4 className="text-base font-bold text-amber-200 tracking-wide">{event.day}</h4>
+                                      {isPast && <span className="text-xs text-amber-300/80 italic font-normal">já foi</span>}
                                   </div>
                                   <p className="text-amber-200 leading-snug">
                                       <strong className="text-amber-100">{event.name}</strong>
                                   </p>
                                 </div>
-                              ))}
+                              )})}
                             </div>
                           </div>
                         </div>
@@ -368,7 +374,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                         <div className="space-y-1 text-amber-200 text-sm">
                             <p><strong className="text-amber-100">TERÇA:</strong> 12H - 20H</p>
                             <p><strong className="text-amber-100">QUARTA - SEXTA:</strong> 12H - 22H</p>
-                            <p><strong className="text-amber-100">SÁBADO:</strong> 16H20 - 22H</p>
+                            <p><strong className="text-amber-100">SÁBADO:</strong> 14H - 22H</p>
                         </div>
                     </div>
                     <div>
@@ -377,7 +383,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                         </div>
                         <div className="space-y-1 text-amber-200 text-sm">
                             <p><strong className="text-amber-100">QUARTA - SEXTA:</strong> 19H</p>
-                            <p><strong className="text-amber-100">SÁBADO:</strong> 16H20</p>
+                            <p><strong className="text-amber-100">SÁBADO:</strong> 14H</p>
                         </div>
                     </div>
                     <p className="text-xs italic text-amber-300 pt-2">*DOMINGO - SÓ SE DER VONTADE</p>
