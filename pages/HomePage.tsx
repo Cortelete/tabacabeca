@@ -366,27 +366,27 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             </Modal>
 
             <Modal isOpen={isHorarioModalOpen} onClose={() => setIsHorarioModalOpen(false)} title="Horário de Funcionamento">
-                <div className="text-center space-y-4 text-amber-100">
-                    <div>
-                        <div className="inline-block bg-amber-400/80 px-3 py-1 rounded-md mb-2">
-                            <h3 className="font-black text-sm text-[#422B0D] tracking-wider">TABACARIA/HEADSHOP</h3>
-                        </div>
-                        <div className="space-y-1 text-amber-200 text-sm">
-                            <p><strong className="text-amber-100">TERÇA:</strong> 12H - 20H</p>
-                            <p><strong className="text-amber-100">QUARTA - SEXTA:</strong> 12H - 22H</p>
-                            <p><strong className="text-amber-100">SÁBADO:</strong> 14H - 22H</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="inline-block bg-amber-400/80 px-3 py-1 rounded-md mb-2">
-                            <h3 className="font-black text-sm text-[#422B0D] tracking-wider">TABAS BAR</h3>
-                        </div>
-                        <div className="space-y-1 text-amber-200 text-sm">
-                            <p><strong className="text-amber-100">QUARTA - SEXTA:</strong> 19H</p>
-                            <p><strong className="text-amber-100">SÁBADO:</strong> 14H</p>
+                <div className="text-center space-y-6 text-amber-100">
+                    <div className="bg-amber-900/30 p-4 rounded-lg border border-amber-500/30">
+                        <h3 className="font-black text-base text-amber-200 tracking-wider mb-2 uppercase">TABACARIA/HEADSHOP E TABAS BAR</h3>
+                        <p className="text-amber-300 font-semibold mb-3">QUARTA À DOMINGO</p>
+                        <div className="flex items-baseline justify-center gap-2 text-3xl sm:text-4xl font-bold">
+                            <span className="ganja-text-glow">4:20PM</span>
+                            <span className="text-amber-400 text-lg mx-2">→</span>
+                            <span className="text-amber-100">11PM</span>
                         </div>
                     </div>
-                    <p className="text-xs italic text-amber-300 pt-2">*DOMINGO - SÓ SE DER VONTADE</p>
+
+                    <div className="bg-amber-900/30 p-4 rounded-lg border border-amber-500/30">
+                        <h3 className="font-black text-base text-amber-200 tracking-wider mb-2 uppercase">LARICA</h3>
+                        <p className="text-amber-300 font-semibold mb-3">QUINTA À DOMINGO</p>
+                        <div className="flex items-baseline justify-center gap-2 text-3xl sm:text-4xl font-bold">
+                            <span className="text-amber-100">7PM</span>
+                            <span className="text-amber-400 text-lg mx-2">→</span>
+                            <span className="text-amber-100">11PM</span>
+                        </div>
+                    </div>
+                    <p className="text-xs italic text-amber-300 pt-2">*as vezes fechamos mais tarde, as vezes mais cedo. usem piteira.</p>
                 </div>
             </Modal>
 
@@ -487,6 +487,21 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
               -webkit-background-clip: text;
               background-clip: text;
               animation: gradient-text-flow 5s linear infinite;
+            }
+            @keyframes ganja-pulse {
+                0%, 100% {
+                    color: #4ade80;
+                    text-shadow: 0 0 5px #4ade80, 0 0 10px #4ade80, 0 0 15px #22c55e;
+                    transform: scale(1);
+                }
+                50% {
+                    color: #86efac;
+                    text-shadow: 0 0 10px #4ade80, 0 0 20px #22c55e, 0 0 30px #16a34a;
+                    transform: scale(1.05);
+                }
+            }
+            .ganja-text-glow {
+                animation: ganja-pulse 3s infinite ease-in-out;
             }
             `}</style>
         </div>
