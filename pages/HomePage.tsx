@@ -226,25 +226,21 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             </div>
             
             <Modal isOpen={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)} title="Nossa História">
-                <div className="text-left space-y-4 text-amber-200 max-h-[70vh] overflow-y-auto pr-2 about-us-scrollbar">
+                <div className="text-left space-y-4 text-white max-h-[70vh] overflow-y-auto pr-2 about-us-scrollbar">
                     <p className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                        A Tabacabeça nasceu em <strong className="highlight-text">2021</strong>, a partir da ideia de criar uma tabacaria com um conceito novo, moderno e conectado com as pautas da <strong className="highlight-text">redução de danos</strong>.
+                        A Tabacabeça nasceu em <strong>2021</strong>, a partir da ideia de criar uma tabacaria com um conceito novo, moderno e conectado com as pautas da <strong>redução de danos</strong>.
                     </p>
                     <p className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                        O que começou como um comércio online de sedas e dichavadores, logo se transformou em um <strong className="highlight-text">ponto de encontro</strong> para artistas, músicos e pensadores da cidade.
+                        O que começou como um comércio online de sedas e dichavadores, logo se transformou em um <strong>ponto de encontro</strong> para artistas, músicos e pensadores da cidade.
                     </p>
                     <div className="animate-fade-in-up border-l-4 border-amber-500 pl-4 py-2 my-2 bg-amber-900/20 rounded-r-md" style={{ animationDelay: '0.5s' }}>
-                        <p className="italic text-amber-100">A música nos guiou para outra direção e, ao promover eventos na nossa pequena mas aconchegante lojinha, conseguimos conectar o público com a <strong className="highlight-text">arte</strong>, a <strong className="highlight-text">criatividade</strong> e o <strong className="highlight-text">debate consciente</strong>.</p>
+                        <p className="italic text-white">A música nos guiou para outra direção e, ao promover eventos na nossa pequena mas aconchegante lojinha, conseguimos conectar o público com a <strong>arte</strong>, a <strong>criatividade</strong> e o <strong>debate consciente</strong>.</p>
                     </div>
                     <p className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
-                        Hoje, praticamente quatro anos depois, já compartilhamos nossa trajetória com <strong className="highlight-text">artistas renomados</strong>, produtores locais e <strong className="highlight-text">novos talentos</strong> que encontraram aqui, oportunidade.
+                        Hoje, praticamente quatro anos depois, já compartilhamos nossa trajetória com <strong>artistas renomados</strong>, produtores locais e <strong>novos talentos</strong> que encontraram aqui, oportunidade.
                     </p>
-                    <p className="animate-fade-in-up font-semibold text-amber-100 pt-2" style={{ animationDelay: '0.9s' }}>
-                        Deixamos nosso muito obrigado a todos que estiveram conosco nesse período, e a todos que ainda estão por nos conhecer. ❤️
-                    </p>
-                     <div className="animate-fade-in-up text-center bg-amber-400/80 p-3 rounded-md !mt-6" style={{ animationDelay: '1.1s' }}>
-                        <p className="font-black text-sm text-[#422B0D]">A nossa programação você pode encontrar nos stories, destaques e link na bio.</p>
-                        <p className="font-bold text-base text-[#422B0D] mt-1">Bora encostar conhecer um pouco do nosso projeto! 🙌🏽</p>
+                     <div className="animate-fade-in-up text-center bg-amber-400/80 p-3 rounded-md !mt-6" style={{ animationDelay: '0.9s' }}>
+                        <p className="font-bold text-base text-[#422B0D]">Deixamos nosso muito obrigado a todos que estiveram conosco nesse período, e a todos que ainda estão por nos conhecer. ❤️</p>
                     </div>
                 </div>
             </Modal>
@@ -365,9 +361,9 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                         <h3 className="font-black text-base text-amber-200 tracking-wider mb-2 uppercase">TABACARIA/HEADSHOP E TABAS BAR</h3>
                         <p className="text-amber-300 font-semibold mb-3">QUARTA À DOMINGO</p>
                         <div className="flex items-baseline justify-center gap-2 text-3xl sm:text-4xl font-bold">
-                            <span className="ganja-text-glow">4:20PM</span>
+                            <span className="text-white">4:20PM</span>
                             <span className="text-amber-400 text-lg mx-2">→</span>
-                            <span className="text-amber-100">11PM</span>
+                            <span className="text-white">11PM</span>
                         </div>
                     </div>
 
@@ -375,9 +371,9 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                         <h3 className="font-black text-base text-amber-200 tracking-wider mb-2 uppercase">LARICA</h3>
                         <p className="text-amber-300 font-semibold mb-3">QUINTA À DOMINGO</p>
                         <div className="flex items-baseline justify-center gap-2 text-3xl sm:text-4xl font-bold">
-                            <span className="text-amber-100">7PM</span>
+                            <span className="text-white">7PM</span>
                             <span className="text-amber-400 text-lg mx-2">→</span>
-                            <span className="text-amber-100">11PM</span>
+                            <span className="text-white">11PM</span>
                         </div>
                     </div>
                     <p className="text-xs italic text-amber-300 pt-2">*as vezes fechamos mais tarde, as vezes mais cedo. usem piteira.</p>
@@ -482,21 +478,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
               background-clip: text;
               animation: gradient-text-flow 5s linear infinite;
             }
-            @keyframes ganja-pulse {
-                0%, 100% {
-                    color: #4ade80;
-                    text-shadow: 0 0 5px #4ade80, 0 0 10px #4ade80, 0 0 15px #22c55e;
-                    transform: scale(1);
-                }
-                50% {
-                    color: #86efac;
-                    text-shadow: 0 0 10px #4ade80, 0 0 20px #22c55e, 0 0 30px #16a34a;
-                    transform: scale(1.05);
-                }
-            }
-            .ganja-text-glow {
-                animation: ganja-pulse 3s infinite ease-in-out;
-            }
             .animate-fade-in-up {
                 animation: fadeInUp 0.6s ease-out forwards;
                 opacity: 0;
@@ -510,11 +491,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                     opacity: 1;
                     transform: translateY(0);
                 }
-            }
-            .highlight-text {
-                color: #fcd34d; /* amber-300 */
-                font-weight: 700;
-                text-shadow: 0 0 5px rgba(252, 211, 77, 0.5);
             }
             .about-us-scrollbar::-webkit-scrollbar {
                 width: 6px;
