@@ -1,24 +1,28 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
 import { GOOGLE_MAPS_URL, GOOGLE_REVIEW_URL, FORM_SUBMIT_EMAIL } from '../constants';
 
-const ActionButton: React.FC<{ href?: string; to?: string; onClick?: () => void; children: React.ReactNode; external?: boolean; disabled?: boolean; onExternalClick?: (url:string) => void; }> = ({ href, to, onClick, children, external = false, disabled = false, onExternalClick }) => {
+const ActionButton: React.FC<{ href?: string; to?: string; onClick?: () => void; children: React.ReactNode; external?: boolean; disabled?: boolean; onExternalClick?: (url:string) => void; special?: boolean }> = ({ href, to, onClick, children, external = false, disabled = false, onExternalClick, special = false }) => {
     const classes = `
-        relative w-full text-center font-semibold py-2 px-4 sm:py-2.5 sm:px-6 rounded-lg transition-all duration-300
+        relative w-full text-center font-semibold py-2 px-4 sm:py-2.5 sm:px-6 rounded-lg transition-all duration-500
         bg-amber-200/10 bg-clip-padding backdrop-filter backdrop-blur-md border
-        text-amber-100 text-sm sm:text-base
-        border-amber-400/30
+        text-sm sm:text-base
         hover:border-amber-400/70
         overflow-hidden group
+        ${special 
+            ? 'animate-pulse-glow border-amber-300 text-amber-50' 
+            : 'border-amber-400/30 text-amber-100'
+        }
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
     `;
 
     const content = (
         <>
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-[#422B0D]">{children}</span>
-            <div className="absolute inset-0 bg-amber-400 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-300 ease-out"></div>
+            <span className="relative z-10 transition-colors duration-500 group-hover:text-[#422B0D]">{children}</span>
+            <div className="absolute inset-0 bg-amber-400 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-in-out"></div>
         </>
     );
 
@@ -154,6 +158,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isSpinning, setIsSpinning] = useState(false);
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
     const [isQuoteVisible, setIsQuoteVisible] = useState(true);
+    const [isPrimaveraModalOpen, setIsPrimaveraModalOpen] = useState(false);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to the start of the day for accurate comparison
@@ -206,6 +211,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </p>
 
                 <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
+                    <ActionButton onClick={() => setIsPrimaveraModalOpen(true)} special>PRIMAVERA JAMAICANA</ActionButton>
                     <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
                     
                     <ActionButton onClick={() => setIsTicketsModalOpen(true)}>Entrada</ActionButton>
@@ -262,10 +268,10 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                             setIsComoChegarModalOpen(false);
                             onExternalClick(GOOGLE_MAPS_URL);
                         }}
-                        className="inline-block relative group overflow-hidden w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 hover:bg-amber-700 !mt-6"
+                        className="inline-block relative group overflow-hidden w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-500 hover:bg-amber-700 !mt-6"
                     >
                         <span className="relative z-10">Ver Rota no Google Maps 🗺️</span>
-                        <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-300 ease-out"></div>
+                        <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-in-out"></div>
                     </button>
                 </div>
             </Modal>
@@ -406,11 +412,38 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                             className="w-full bg-[#422B0D]/50 border border-amber-500/50 rounded-md p-2 focus:ring-amber-500 focus:border-amber-500 text-amber-100 placeholder:text-amber-300/60" 
                         />
                      </div>
-                     <button type="submit" className="relative group overflow-hidden w-full bg-amber-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 hover:bg-amber-700">
+                     <button type="submit" className="relative group overflow-hidden w-full bg-amber-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-500 hover:bg-amber-700">
                         <span className="relative z-10">Enviar Feedback</span>
-                        <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-300 ease-out"></div>
+                        <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-in-out"></div>
                     </button>
                 </form>
+            </Modal>
+
+            <Modal isOpen={isPrimaveraModalOpen} onClose={() => setIsPrimaveraModalOpen(false)} title="Primavera Jamaicana">
+                <div className="text-center space-y-4">
+                    <div className="bg-amber-900/30 p-4 rounded-lg border border-amber-500/30">
+                        <h3 className="font-black text-lg sm:text-xl text-amber-100 tracking-wider mb-2 uppercase animated-gradient-time">SÁBADO, 21 DE SETEMBRO</h3>
+                        <p className="text-amber-200 mt-3 mb-4 leading-relaxed">
+                            Saudamos a nova estação com muito Reggae! 🔥<br/>
+                            Junte-se a nós e nossos convidados <strong className="text-white">DDD41</strong>, <strong className="text-white">Matula Roots</strong> e <strong className="text-white">Castanheira Banda</strong> para uma noite de pura good vibration.
+                        </p>
+                        <div className="text-sm text-amber-300 space-y-1">
+                            <p>🎨 Exposições de arte, artesanato e brechós.</p>
+                            <p>🍔 Cozinha aberta a partir das 19h.</p>
+                        </div>
+                    </div>
+
+                    <button 
+                        onClick={() => {
+                            setIsPrimaveraModalOpen(false);
+                            onExternalClick('https://pixta.me/u/primavera-jamaicana');
+                        }}
+                        className="inline-block relative group overflow-hidden w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-500 hover:bg-green-700 !mt-6"
+                    >
+                        <span className="relative z-10">Comprar Ingresso Antecipado 🎟️</span>
+                        <div className="absolute inset-0 bg-green-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-in-out"></div>
+                    </button>
+                </div>
             </Modal>
 
             <style>{`
@@ -508,6 +541,19 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             .about-us-scrollbar {
                 scrollbar-width: thin;
                 scrollbar-color: #f59e0b transparent; /* thumb and track */
+            }
+            @keyframes pulse-glow {
+              0%, 100% {
+                box-shadow: 0 0 3px #fcd34d, 0 0 6px #fcd34d;
+                transform: scale(1);
+              }
+              50% {
+                box-shadow: 0 0 8px #fcd34d, 0 0 15px #fcd34d;
+                transform: scale(1.02);
+              }
+            }
+            .animate-pulse-glow {
+              animation: pulse-glow 2.5s infinite ease-in-out;
             }
             `}</style>
         </div>
