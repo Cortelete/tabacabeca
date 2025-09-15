@@ -150,7 +150,6 @@ const programacaoData = [
 const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
-    const [isTicketsModalOpen, setIsTicketsModalOpen] = useState(false);
     const [isProgramacaoModalOpen, setIsProgramacaoModalOpen] = useState(false);
     const [openWeekIndex, setOpenWeekIndex] = useState<number | null>(0);
     const [isHorarioModalOpen, setIsHorarioModalOpen] = useState(false);
@@ -213,9 +212,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
                     <ActionButton onClick={() => setIsPrimaveraModalOpen(true)} special>PRIMAVERA JAMAICANA</ActionButton>
                     <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
-                    
-                    <ActionButton onClick={() => setIsTicketsModalOpen(true)}>Entrada</ActionButton>
-                    
+                                        
                     <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação</ActionButton>
 
                     <ActionButton onClick={() => setIsComoChegarModalOpen(true)}>Como Chegar</ActionButton>
@@ -276,26 +273,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </div>
             </Modal>
             
-            <Modal isOpen={isTicketsModalOpen} onClose={() => setIsTicketsModalOpen(false)} title="Entrada esse Sábado">
-                <div className="text-center space-y-4">
-                    <div className="grid grid-cols-1 gap-4 text-center">
-                        <div className="bg-amber-900/30 p-4 rounded-lg border border-amber-500/30">
-                            <h3 className="font-bold text-amber-100 text-lg animated-gradient-time">ATÉ AS 16H</h3>
-                            <p className="text-3xl font-black mt-2 animated-gradient-price-free">GRATUITA</p>
-                            <p className="text-amber-300 text-xs mt-1">Chegue cedo e aproveite!</p>
-                        </div>
-                        <div className="bg-amber-900/30 p-4 rounded-lg border border-amber-500/30">
-                            <h3 className="font-bold text-amber-100 text-lg animated-gradient-time">APÓS AS 16H</h3>
-                            <p className="text-3xl font-black mt-2 animated-gradient-price-paid">R$10</p>
-                            <p className="text-amber-300 text-xs mt-1">Sua contribuição para a festa!</p>
-                        </div>
-                    </div>
-                    <p className="text-sm text-amber-300 pt-2">
-                        A lista de entrada gratuita é válida para quem chegar no local até o horário estipulado.
-                    </p>
-                </div>
-            </Modal>
-
             <Modal isOpen={isProgramacaoModalOpen} onClose={() => setIsProgramacaoModalOpen(false)} title="Programação">
                  <div className="text-left space-y-3 text-sm text-amber-100 max-h-[70vh] overflow-y-auto pr-2">
                     <div className="text-center bg-amber-400/80 p-1.5 rounded-md mb-3">
