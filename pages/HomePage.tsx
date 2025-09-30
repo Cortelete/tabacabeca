@@ -157,7 +157,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isSpinning, setIsSpinning] = useState(false);
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
     const [isQuoteVisible, setIsQuoteVisible] = useState(true);
-    const [isPrimaveraModalOpen, setIsPrimaveraModalOpen] = useState(false);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to the start of the day for accurate comparison
@@ -192,8 +191,13 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     
     return (
         <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center h-full py-2 sm:py-4">
-            <div className="w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center">
-
+            <div className="relative w-full max-w-sm bg-[#422B0D]/80 text-amber-100 backdrop-blur-lg border border-amber-400/20 rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center">
+                <img
+                    src="/outubrorosa.png"
+                    alt="Outubro Rosa"
+                    title="Outubro Rosa - Mês de conscientização sobre o câncer de mama"
+                    className="absolute top-2 left-2 w-8 h-8 sm:w-10 sm:h-10"
+                />
                 <div className="w-24 h-24 sm:w-32 sm:h-32 mb-2" style={{ perspective: '1000px' }}>
                     <img 
                         src="/logo.png" 
@@ -210,7 +214,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </p>
 
                 <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
-                    <ActionButton onClick={() => setIsPrimaveraModalOpen(true)} special>PRIMAVERA JAMAICANA</ActionButton>
                     <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
                                         
                     <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação</ActionButton>
@@ -394,33 +397,6 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                         <div className="absolute inset-0 bg-amber-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-in-out"></div>
                     </button>
                 </form>
-            </Modal>
-
-            <Modal isOpen={isPrimaveraModalOpen} onClose={() => setIsPrimaveraModalOpen(false)} title="Primavera Jamaicana">
-                <div className="text-center space-y-4">
-                    <div className="bg-amber-900/30 p-4 rounded-lg border border-amber-500/30">
-                        <h3 className="font-black text-lg sm:text-xl text-amber-100 tracking-wider mb-2 uppercase animated-gradient-time">SÁBADO, 21 DE SETEMBRO</h3>
-                        <p className="text-amber-200 mt-3 mb-4 leading-relaxed">
-                            Saudamos a nova estação com muito Reggae! 🔥<br/>
-                            Junte-se a nós e nossos convidados <strong className="text-white">DDD41</strong>, <strong className="text-white">Matula Roots</strong> e <strong className="text-white">Castanheira Banda</strong> para uma noite de pura good vibration.
-                        </p>
-                        <div className="text-sm text-amber-300 space-y-1">
-                            <p>🎨 Exposições de arte, artesanato e brechós.</p>
-                            <p>🍔 Cozinha aberta a partir das 19h.</p>
-                        </div>
-                    </div>
-
-                    <button 
-                        onClick={() => {
-                            setIsPrimaveraModalOpen(false);
-                            onExternalClick('https://pixta.me/u/primavera-jamaicana');
-                        }}
-                        className="inline-block relative group overflow-hidden w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-500 hover:bg-green-700 !mt-6"
-                    >
-                        <span className="relative z-10">Comprar Ingresso Antecipado 🎟️</span>
-                        <div className="absolute inset-0 bg-green-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-in-out"></div>
-                    </button>
-                </div>
             </Modal>
 
             <style>{`
