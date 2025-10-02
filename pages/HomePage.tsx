@@ -1,7 +1,5 @@
 
-
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
 import { GOOGLE_MAPS_URL, GOOGLE_REVIEW_URL, FORM_SUBMIT_EMAIL } from '../constants';
 
@@ -38,7 +36,9 @@ const ActionButton: React.FC<{ href?: string; to?: string; onClick?: () => void;
         return <a href={href} target={external ? "_blank" : "_self"} rel={external ? "noopener noreferrer" : ""} className={classes}>{content}</a>;
     }
     if (to) {
-        return <Link to={to} className={classes}>{content}</Link>;
+        // Link component from react-router-dom is not used in this scenario, so it's removed for cleanup.
+        // A standard anchor tag would navigate within the HashRouter.
+        return <a href={`#${to}`} className={classes}>{content}</a>;
     }
     return <button onClick={onClick} className={classes}>{content}</button>;
 };
@@ -115,33 +115,13 @@ const quotes = [
 
 const programacaoData = [
   {
-    title: 'Semana 1: 02/09 - 08/09',
+    title: 'Semana 1: 01/10 - 05/10',
     events: [
-      { day: 'SEX. 05', name: 'DJ NUNO, SID & IGÃO' },
-      { day: 'DOM. 07', name: 'P4 SESH #05: POCKET FORMIGA JUCA' },
-    ]
-  },
-  {
-    title: 'Semana 2: 09/09 - 15/09',
-    events: [
-      { day: 'SEX. 12', name: 'DON CARLO' },
-      { day: 'SÁB. 13', name: 'CAIXA PRETA' },
-    ]
-  },
-  {
-    title: 'Semana 3: 16/09 - 22/09',
-    events: [
-      { day: 'SEX. 19', name: 'ROCK DE PONTA' },
-      { day: 'SÁB. 20', name: 'AFROHIGH' },
-      { day: 'DOM. 21', name: 'MATULA ROOTS + CASTANHEIRA' },
-    ]
-  },
-    {
-    title: 'Semana 4: 23/09 - 29/09',
-    events: [
-      { day: 'SEX. 26', name: 'DJ NUNO, SID & IGÃO' },
-      { day: 'SÁB. 27', name: 'STANLEY' },
-      { day: 'DOM. 28', name: 'DIA DE FEIRA COM BFACE + RESIDENTES' },
+      { dayNum: 1, displayDay: '📅 QUARTA-FEIRA', title: 'Oficina(?): Testagem de equipamentos, ensaio & amigos', details: ['⏰ 20h 🎟️ Entrada 0800 (gratuita)'] },
+      { dayNum: 2, displayDay: '📅 QUINTA-FEIRA (02/10)', title: 'Fumaça de Quintal convida: Matheus Dallas', details: ['Samba, Brasilidades & Reggae', '🎟️ Entrada free até 20h'] },
+      { dayNum: 3, displayDay: '📅 SEXTA-FEIRA', title: 'This is Fino: Rap, HipHop e R&B', details: ['🎟️ Entrada free até 20h'] },
+      { dayNum: 4, displayDay: '📅 SÁBADO', title: 'Baile Charme da Tabas: DarlanZZinho, Sidejota & Convidados', details: ['🍹 Promoções especiais até 20h'] },
+      { dayNum: 5, displayDay: '📅 DOMINGO', title: 'DJ Nuno + DJ Banga discotecando Rap & HipHop no vinil', details: ['⏰ 20h'] }
     ]
   }
 ];
@@ -161,7 +141,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to the start of the day for accurate comparison
     const currentYear = today.getFullYear();
-    const SEPTEMBER = 8; // Month is 0-indexed, so 8 is September.
+    const OCTOBER = 9; // Month is 0-indexed, so 9 is October.
 
      useEffect(() => {
         const quoteInterval = setInterval(() => {
@@ -279,23 +259,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             <Modal isOpen={isProgramacaoModalOpen} onClose={() => setIsProgramacaoModalOpen(false)} title="Programação">
                  <div className="text-left space-y-3 text-sm text-amber-100 max-h-[70vh] overflow-y-auto pr-2">
                     <div className="text-center bg-amber-400/80 p-1.5 rounded-md mb-3">
-                        <h3 className="font-black text-sm text-[#422B0D] tracking-wider">AGENDA SETEMBRO</h3>
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="border-b border-amber-400/20 pb-2">
-                          <div className="flex justify-between items-center mb-1">
-                              <h4 className="text-base font-bold text-amber-200 tracking-wide">TODA QUARTA</h4>
-                          </div>
-                          <p className="text-amber-200 leading-snug"><strong className="text-amber-100">FUMACA DE QUINTAL</strong></p>
-                      </div>
-
-                      <div className="border-b border-amber-400/20 pb-2">
-                          <div className="flex justify-between items-center mb-1">
-                              <h4 className="text-base font-bold text-amber-200 tracking-wide">TODA QUINTA</h4>
-                          </div>
-                          <p className="text-amber-200 leading-snug"><strong className="text-amber-100">OPEN DECKS</strong></p>
-                      </div>
+                        <h3 className="font-black text-sm text-[#422B0D] tracking-wider">AGENDA OUTUBRO</h3>
                     </div>
 
                     <div className="pt-2 space-y-2">
@@ -310,28 +274,39 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                           </button>
-                          <div className={`transition-all duration-500 ease-in-out overflow-hidden ${openWeekIndex === index ? 'max-h-96' : 'max-h-0'}`}>
+                          <div className={`transition-all duration-500 ease-in-out overflow-hidden ${openWeekIndex === index ? 'max-h-[40rem]' : 'max-h-0'}`}>
                             <div className="pt-1 pb-3 pl-2 space-y-3">
                               {week.events.map((event, eventIndex) => {
-                                const day = parseInt(event.day.split(' ')[1], 10);
-                                const eventDate = new Date(currentYear, SEPTEMBER, day);
+                                const day = event.dayNum;
+                                const eventDate = new Date(currentYear, OCTOBER, day);
                                 const isPast = eventDate < today;
 
                                 return (
                                 <div key={eventIndex} className={isPast ? 'opacity-60' : ''}>
                                   <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
-                                      <h4 className="text-base font-bold text-amber-200 tracking-wide">{event.day}</h4>
+                                      <h4 className="text-base font-bold text-amber-200 tracking-wide">{event.displayDay}</h4>
                                       {isPast && <span className="text-xs text-amber-300/80 italic font-normal">já foi</span>}
                                   </div>
-                                  <p className="text-amber-200 leading-snug">
-                                      <strong className="text-amber-100">{event.name}</strong>
-                                  </p>
+                                  <div className="text-amber-200 leading-snug pl-2">
+                                    <strong className="text-amber-100">{event.title}</strong>
+                                    {event.details.map((detail, i) => (
+                                      <div key={i} className="text-amber-300 text-sm">{detail}</div>
+                                    ))}
+                                  </div>
                                 </div>
                               )})}
                             </div>
                           </div>
                         </div>
                       ))}
+                    </div>
+
+                    <div className="text-center bg-amber-900/30 p-3 rounded-md !mt-4 border border-amber-500/30">
+                        <h4 className="font-black text-base text-amber-200 tracking-wider mb-2 uppercase">Eventos Fixos</h4>
+                        <div className="space-y-1 text-amber-300">
+                            <p> <span className="font-semibold text-amber-200">Toda Quarta:</span> Fumaça de Quintal 🔥</p>
+                            <p> <span className="font-semibold text-amber-200">Toda Quinta:</span> Open Decks 🎛️</p>
+                        </div>
                     </div>
                     
                     <div className="text-center bg-amber-400/80 p-2 rounded-md !mt-4">
