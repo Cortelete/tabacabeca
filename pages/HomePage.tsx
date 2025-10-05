@@ -137,6 +137,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isSpinning, setIsSpinning] = useState(false);
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
     const [isQuoteVisible, setIsQuoteVisible] = useState(true);
+    const [isChamaProBaileModalOpen, setIsChamaProBaileModalOpen] = useState(false);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to the start of the day for accurate comparison
@@ -194,6 +195,9 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </p>
 
                 <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
+                    <ActionButton onClick={() => setIsChamaProBaileModalOpen(true)} special={true}>
+                        CHAMA PRO BAILE | CLEITON RASTA
+                    </ActionButton>
                     <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
                                         
                     <ActionButton onClick={() => setIsProgramacaoModalOpen(true)}>Programação</ActionButton>
@@ -228,6 +232,51 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                      <div className="animate-fade-in-up text-center bg-amber-400/80 p-3 rounded-md !mt-6" style={{ animationDelay: '0.9s' }}>
                         <p className="font-bold text-base text-[#422B0D]">Deixamos nosso muito obrigado a todos que estiveram conosco nesse período, e a todos que ainda estão por nos conhecer. ❤️</p>
                     </div>
+                </div>
+            </Modal>
+
+            <Modal isOpen={isChamaProBaileModalOpen} onClose={() => setIsChamaProBaileModalOpen(false)} title="Chama Pro Baile - 1ª Edição">
+                <div className="text-center space-y-4 text-amber-100">
+                    <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                        <h3 className="text-2xl sm:text-3xl font-black text-amber-300 tracking-wider">CLEITON RASTA</h3>
+                        <p className="text-sm text-amber-200">O ícone do reggae e da cultura popular brasileira!</p>
+                    </div>
+
+                    <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+                        <p className="text-amber-100 font-bold text-lg">E mais:</p>
+                        <p className="text-amber-200">DJ Don Carlo + Exposições</p>
+                    </div>
+
+                    <div className="animate-fade-in-up grid grid-cols-2 gap-4 text-left p-3 bg-amber-900/30 rounded-lg border border-amber-500/30" style={{ animationDelay: '0.5s' }}>
+                        <div>
+                            <p className="font-bold text-amber-200">📅 Data:</p>
+                            <p>17 de Outubro, 2025</p>
+                        </div>
+                        <div>
+                            <p className="font-bold text-amber-200">⏰ Horário:</p>
+                            <p>A partir das 19h</p>
+                        </div>
+                         <div className="col-span-2">
+                            <p className="font-bold text-amber-200">📍 Local:</p>
+                            <p>Tabacabeça Bar e Headshop</p>
+                        </div>
+                    </div>
+                    
+                    <div className="animate-fade-in-up bg-amber-400/80 p-2 rounded-md" style={{ animationDelay: '0.7s' }}>
+                        <p className="font-black text-lg text-[#422B0D]">1º LOTE: R$ 20,00</p>
+                    </div>
+                    
+                    <button
+                        onClick={() => {
+                            setIsChamaProBaileModalOpen(false);
+                            onExternalClick('https://pixta.me/u/chama-pro-baile');
+                        }}
+                        className="!mt-6 animate-fade-in-up inline-block relative group overflow-hidden w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-500 hover:bg-green-700"
+                        style={{ animationDelay: '0.9s' }}
+                    >
+                        <span className="relative z-10">Garantir meu Ingresso 🎟️</span>
+                        <div className="absolute inset-0 bg-green-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-in-out"></div>
+                    </button>
                 </div>
             </Modal>
 
