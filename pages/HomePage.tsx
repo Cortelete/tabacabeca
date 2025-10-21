@@ -115,13 +115,19 @@ const quotes = [
 
 const programacaoData = [
   {
-    title: 'Semana 1: 01/10 - 05/10',
+    title: 'Programação da Semana',
     events: [
-      { dayNum: 1, displayDay: '📅 QUARTA-FEIRA', title: 'Oficina(?): Testagem de equipamentos, ensaio & amigos', details: ['⏰ 20h 🎟️ Entrada 0800 (gratuita)'] },
-      { dayNum: 2, displayDay: '📅 QUINTA-FEIRA (02/10)', title: 'Fumaça de Quintal convida: Matheus Dallas', details: ['Samba, Brasilidades & Reggae', '🎟️ Entrada free até 20h'] },
-      { dayNum: 3, displayDay: '📅 SEXTA-FEIRA', title: 'This is Fino: Rap, HipHop e R&B', details: ['🎟️ Entrada free até 20h'] },
-      { dayNum: 4, displayDay: '📅 SÁBADO', title: 'Baile Charme da Tabas: DarlanZZinho, Sidejota & Convidados', details: ['🍹 Promoções especiais até 20h'] },
-      { dayNum: 5, displayDay: '📅 DOMINGO', title: 'DJ Nuno + DJ Banga discotecando Rap & HipHop no vinil', details: ['⏰ 20h'] }
+      { dayNum: 22, displayDay: '📅 QUARTA 22/10', title: 'Fumaça de Quintal: Ensaio Aberto', details: ['A partir das 20hs', 'Entrada Free'] },
+      { dayNum: 23, displayDay: '📅 QUINTA 23/10', title: 'Open Decks', details: ['A partir das 20hs', 'Entrada Free'] },
+      { dayNum: 24, displayDay: '📅 SEXTA 24/10', title: 'Samsara', details: ['A partir das 20hs', 'Entrada $10'] },
+      { dayNum: 25, displayDay: '📅 SÁBADO 25/10', title: 'Coletivo 268: House Music e Suas Vertentes', details: ['Entrada $10'] },
+      { dayNum: 26, displayDay: '📅 DOMINGO 26/10', title: 'Dia de Feira', details: ['Feira de expositores, cultura e música', 'Com DJ Afrohigh, Nuno, Sidejota e Igao HK'] }
+    ]
+  },
+  {
+    title: 'Especial de Halloween',
+    events: [
+      { dayNum: 31, displayDay: '🎃 SEXTA 31/10 - DIA DO SACI', title: 'Contra a Invasão Cultural!', details: ['Apresentando: Banda Chave de Mandril', 'Festa a Fantasia com premiação da Fumaçônica para a melhor!', 'Entrada Solidária: R$10 + 1kg de alimento', '(Alimento será revertido pro projeto Gueto em Movimento)'] },
     ]
   }
 ];
@@ -137,11 +143,11 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isSpinning, setIsSpinning] = useState(false);
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
     const [isQuoteVisible, setIsQuoteVisible] = useState(true);
-    const [isChamaProBaileModalOpen, setIsChamaProBaileModalOpen] = useState(false);
+    const [isDiaDoSaciModalOpen, setIsDiaDoSaciModalOpen] = useState(false);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to the start of the day for accurate comparison
-    const currentYear = today.getFullYear();
+    const eventYear = 2025; // Use 2025 to align with other hardcoded dates
     const OCTOBER = 9; // Month is 0-indexed, so 9 is October.
 
      useEffect(() => {
@@ -195,8 +201,8 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </p>
 
                 <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
-                    <ActionButton onClick={() => setIsChamaProBaileModalOpen(true)} special={true}>
-                        CHAMA PRO BAILE | CLEITON RASTA
+                    <ActionButton onClick={() => setIsDiaDoSaciModalOpen(true)} special={true}>
+                        🎃 ESPECIAL DIA DO SACI 🎃
                     </ActionButton>
                     <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
                                         
@@ -235,50 +241,29 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </div>
             </Modal>
 
-            <Modal isOpen={isChamaProBaileModalOpen} onClose={() => setIsChamaProBaileModalOpen(false)} title="Chama Pro Baile - 1ª Edição">
+            <Modal isOpen={isDiaDoSaciModalOpen} onClose={() => setIsDiaDoSaciModalOpen(false)} title="Dia do Saci - 31/10">
                 <div className="text-center space-y-4 text-amber-100">
                     <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                        <h3 className="text-2xl sm:text-3xl font-black text-amber-300 tracking-wider">CLEITON RASTA</h3>
-                        <p className="text-sm text-amber-200">O ícone do reggae e da cultura popular brasileira!</p>
+                        <h3 className="text-2xl sm:text-3xl font-black text-amber-300 tracking-wider">CONTRA A INVASÃO CULTURAL!</h3>
+                        <p className="text-sm text-amber-200">com Banda Chave de Mandril 🎸</p>
                     </div>
 
                     <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                        <p className="text-amber-100 font-bold text-lg">E mais:</p>
-                        <p className="text-amber-200">DJ Don Carlo + Exposições</p>
+                        <p className="text-amber-100 font-bold text-lg">👻 Festa a Fantasia</p>
+                        <p className="text-amber-200">com premiação da Fumaçônica para a melhor fantasia!</p>
                     </div>
 
-                    <div className="animate-fade-in-up grid grid-cols-2 gap-4 text-left p-3 bg-amber-900/30 rounded-lg border border-amber-500/30" style={{ animationDelay: '0.5s' }}>
-                        <div>
-                            <p className="font-bold text-amber-200">📅 Data:</p>
-                            <p>17 de Outubro, 2025</p>
-                        </div>
-                        <div>
-                            <p className="font-bold text-amber-200">⏰ Horário:</p>
-                            <p>A partir das 19h</p>
-                        </div>
-                         <div className="col-span-2">
-                            <p className="font-bold text-amber-200">📍 Local:</p>
-                            <p>Tabacabeça Bar e Headshop</p>
-                        </div>
+                    <div className="animate-fade-in-up bg-amber-400/80 p-3 rounded-md !mt-6" style={{ animationDelay: '0.5s' }}>
+                        <p className="font-black text-lg text-[#422B0D]">ENTRADA SOLIDÁRIA</p>
+                         <p className="font-bold text-base text-[#422B0D]">$10 + 1kg de alimento</p>
                     </div>
                     
-                    <div className="animate-fade-in-up bg-amber-400/80 p-2 rounded-md" style={{ animationDelay: '0.7s' }}>
-                        <p className="font-black text-lg text-[#422B0D]">1º LOTE: R$ 20,00</p>
-                    </div>
-                    
-                    <button
-                        onClick={() => {
-                            setIsChamaProBaileModalOpen(false);
-                            onExternalClick('https://pixta.me/u/chama-pro-baile');
-                        }}
-                        className="!mt-6 animate-fade-in-up inline-block relative group overflow-hidden w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-500 hover:bg-green-700"
-                        style={{ animationDelay: '0.9s' }}
-                    >
-                        <span className="relative z-10">Garantir meu Ingresso 🎟️</span>
-                        <div className="absolute inset-0 bg-green-500 transform scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-in-out"></div>
-                    </button>
+                    <p className="animate-fade-in-up text-xs text-amber-300" style={{ animationDelay: '0.7s' }}>
+                        (Alimento será revertido para o projeto Gueto em Movimento)
+                    </p>
                 </div>
             </Modal>
+
 
              <Modal isOpen={isComoChegarModalOpen} onClose={() => setIsComoChegarModalOpen(false)} title="Como Chegar">
                 <div className="text-center space-y-4">
@@ -327,7 +312,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                             <div className="pt-1 pb-3 pl-2 space-y-3">
                               {week.events.map((event, eventIndex) => {
                                 const day = event.dayNum;
-                                const eventDate = new Date(currentYear, OCTOBER, day);
+                                const eventDate = new Date(eventYear, OCTOBER, day);
                                 const isPast = eventDate < today;
 
                                 return (
