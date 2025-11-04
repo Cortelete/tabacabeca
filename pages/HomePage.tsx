@@ -113,24 +113,7 @@ const quotes = [
     'Plante o bem, que o resto vem.',
 ];
 
-const programacaoData = [
-  {
-    title: 'Programação da Semana',
-    events: [
-      { dayNum: 22, displayDay: '📅 QUARTA 22/10', title: 'Fumaça de Quintal: Ensaio Aberto', details: ['A partir das 20hs', 'Entrada Free'] },
-      { dayNum: 23, displayDay: '📅 QUINTA 23/10', title: 'Open Decks', details: ['A partir das 20hs', 'Entrada Free'] },
-      { dayNum: 24, displayDay: '📅 SEXTA 24/10', title: 'Samsara', details: ['A partir das 20hs', 'Entrada $10'] },
-      { dayNum: 25, displayDay: '📅 SÁBADO 25/10', title: 'Coletivo 268: House Music e Suas Vertentes', details: ['Entrada $10'] },
-      { dayNum: 26, displayDay: '📅 DOMINGO 26/10', title: 'Dia de Feira', details: ['Feira de expositores, cultura e música', 'Com DJ Afrohigh, Nuno, Sidejota e Igao HK'] }
-    ]
-  },
-  {
-    title: 'Especial de Halloween',
-    events: [
-      { dayNum: 31, displayDay: '🎃 SEXTA 31/10 - DIA DO SACI', title: 'Contra a Invasão Cultural!', details: ['Apresentando: Banda Chave de Mandril', 'Festa a Fantasia com premiação da Fumaçônica para a melhor!', 'Entrada Solidária: R$10 + 1kg de alimento', '(Alimento será revertido pro projeto Gueto em Movimento)'] },
-    ]
-  }
-];
+const programacaoData: any[] = [];
 
 
 const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
@@ -143,7 +126,7 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
     const [isSpinning, setIsSpinning] = useState(false);
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
     const [isQuoteVisible, setIsQuoteVisible] = useState(true);
-    const [isDiaDoSaciModalOpen, setIsDiaDoSaciModalOpen] = useState(false);
+    const [isNextEventModalOpen, setIsNextEventModalOpen] = useState(false);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to the start of the day for accurate comparison
@@ -201,8 +184,8 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </p>
 
                 <div className="w-full flex flex-col items-center gap-2 sm:gap-3">
-                    <ActionButton onClick={() => setIsDiaDoSaciModalOpen(true)} special={true}>
-                        🎃 ESPECIAL DIA DO SACI 🎃
+                    <ActionButton onClick={() => setIsNextEventModalOpen(true)}>
+                        PRÓXIMO EVENTO EM BREVE
                     </ActionButton>
                     <ActionButton href="https://www.instagram.com/tabacabeca" external onExternalClick={onExternalClick}>Instagram</ActionButton>
                                         
@@ -241,26 +224,10 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                 </div>
             </Modal>
 
-            <Modal isOpen={isDiaDoSaciModalOpen} onClose={() => setIsDiaDoSaciModalOpen(false)} title="Dia do Saci - 31/10">
+            <Modal isOpen={isNextEventModalOpen} onClose={() => setIsNextEventModalOpen(false)} title="Próximo Evento">
                 <div className="text-center space-y-4 text-amber-100">
-                    <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                        <h3 className="text-2xl sm:text-3xl font-black text-amber-300 tracking-wider">CONTRA A INVASÃO CULTURAL!</h3>
-                        <p className="text-sm text-amber-200">com Banda Chave de Mandril 🎸</p>
-                    </div>
-
-                    <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                        <p className="text-amber-100 font-bold text-lg">👻 Festa a Fantasia</p>
-                        <p className="text-amber-200">com premiação da Fumaçônica para a melhor fantasia!</p>
-                    </div>
-
-                    <div className="animate-fade-in-up bg-amber-400/80 p-3 rounded-md !mt-6" style={{ animationDelay: '0.5s' }}>
-                        <p className="font-black text-lg text-[#422B0D]">ENTRADA SOLIDÁRIA</p>
-                         <p className="font-bold text-base text-[#422B0D]">$10 + 1kg de alimento</p>
-                    </div>
-                    
-                    <p className="animate-fade-in-up text-xs text-amber-300" style={{ animationDelay: '0.7s' }}>
-                        (Alimento será revertido para o projeto Gueto em Movimento)
-                    </p>
+                    <p>Aguarde! Em breve atualizaremos a página com nosso próximo evento.</p>
+                    <p className="text-2xl">🎉</p>
                 </div>
             </Modal>
 
@@ -291,51 +258,14 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
             </Modal>
             
             <Modal isOpen={isProgramacaoModalOpen} onClose={() => setIsProgramacaoModalOpen(false)} title="Programação">
-                 <div className="text-left space-y-3 text-sm text-amber-100 max-h-[70vh] overflow-y-auto pr-2">
-                    <div className="text-center bg-amber-400/80 p-1.5 rounded-md mb-3">
-                        <h3 className="font-black text-sm text-[#422B0D] tracking-wider">AGENDA OUTUBRO</h3>
+                 <div className="text-left space-y-4 text-sm text-amber-100 max-h-[70vh] overflow-y-auto pr-2">
+                    <div className="text-center py-4 border-b border-amber-400/20">
+                        <h3 className="font-black text-sm text-[#422B0D] tracking-wider bg-amber-400/80 p-1.5 rounded-md mb-3 inline-block">AGENDA DE EVENTOS</h3>
+                        <p className="text-lg text-amber-200">Atualização em breve...</p>
+                        <p className="mt-1 text-amber-300 text-xs">Fique de olho em nosso Instagram para não perder nada!</p>
                     </div>
 
-                    <div className="pt-2 space-y-2">
-                      {programacaoData.map((week, index) => (
-                        <div key={index} className="border-b border-amber-400/20 last:border-b-0">
-                          <button 
-                            onClick={() => setOpenWeekIndex(index === openWeekIndex ? null : index)}
-                            className="w-full flex justify-between items-center text-left py-2 font-bold text-amber-200 hover:text-amber-100 transition-colors"
-                          >
-                            <span>{week.title}</span>
-                             <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 transition-transform duration-300 ${openWeekIndex === index ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
-                              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                          </button>
-                          <div className={`transition-all duration-500 ease-in-out overflow-hidden ${openWeekIndex === index ? 'max-h-[40rem]' : 'max-h-0'}`}>
-                            <div className="pt-1 pb-3 pl-2 space-y-3">
-                              {week.events.map((event, eventIndex) => {
-                                const day = event.dayNum;
-                                const eventDate = new Date(eventYear, OCTOBER, day);
-                                const isPast = eventDate < today;
-
-                                return (
-                                <div key={eventIndex} className={isPast ? 'opacity-60' : ''}>
-                                  <div className="flex justify-between items-center mb-1 flex-wrap gap-x-2">
-                                      <h4 className="text-base font-bold text-amber-200 tracking-wide">{event.displayDay}</h4>
-                                      {isPast && <span className="text-xs text-amber-300/80 italic font-normal">já foi</span>}
-                                  </div>
-                                  <div className="text-amber-200 leading-snug pl-2">
-                                    <strong className="text-amber-100">{event.title}</strong>
-                                    {event.details.map((detail, i) => (
-                                      <div key={i} className="text-amber-300 text-sm">{detail}</div>
-                                    ))}
-                                  </div>
-                                </div>
-                              )})}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="text-center bg-amber-900/30 p-3 rounded-md !mt-4 border border-amber-500/30">
+                    <div className="text-center bg-amber-900/30 p-3 rounded-md border border-amber-500/30">
                         <h4 className="font-black text-base text-amber-200 tracking-wider mb-2 uppercase">Eventos Fixos</h4>
                         <div className="space-y-1 text-amber-300">
                             <p> <span className="font-semibold text-amber-200">Toda Quarta:</span> Fumaça de Quintal 🔥</p>
@@ -343,9 +273,9 @@ const HomePage: React.FC<HomePageProps> = ({ onExternalClick }) => {
                         </div>
                     </div>
                     
-                    <div className="text-center bg-amber-400/80 p-2 rounded-md !mt-4">
-                        <p className="font-black text-sm text-[#422B0D]">COZINHA ABERTA DE QUINTA A SÁBADO.</p>
-                        <p className="font-bold text-xs text-[#422B0D]">DAS 18:30 ÀS 22:00</p>
+                    <div className="text-center bg-amber-400/80 p-2 rounded-md">
+                        <p className="font-black text-sm text-[#422B0D]">COZINHA ABERTA DE QUINTA A DOMINGO.</p>
+                        <p className="font-bold text-xs text-[#422B0D]">DAS 19:00 ÀS 23:00</p>
                     </div>
                 </div>
             </Modal>
